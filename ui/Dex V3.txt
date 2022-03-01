@@ -1,0 +1,4 @@
+-- Created by ???
+-- Brought to you by Neon_ Fox#4237
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Neon-Fox/roblox-scripts/main/Dex-V3"))()
