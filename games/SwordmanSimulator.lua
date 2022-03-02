@@ -5,8 +5,9 @@ game:GetService("Players").LocalPlayer.Idled:Connect(function()
 end)
 
 _G.Settings = {
-    autoTap = false;
-    walkSpeed     = false;
+    autoTap   = false;
+    autoKill  = false;
+    walkSpeed = false;
 }
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -35,6 +36,19 @@ Farm:Toggle("Auto Click", "", false, function(v)
     end)
 end)
 
+Farm:Toggle("Auto Tp Kill", "", false, function(v)
+    _G.Settings.autoKill = v
+
+    task.spawn(function()
+        while task.wait() do
+            if not _G.Settings.autoKill then break end
+            for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                local NewPlayer                          = v.Character.HumanoidRootPart.CFrame
+                Player.Character.HumanoidRootPart.CFrame = NewPlayer  
+            end
+        end
+    end)
+end)
 
 local Tele = w:Tab("Teleport", 8916381379)
 
@@ -50,11 +64,14 @@ for i,  v in pairs(game:GetService("Workspace")["__MAP"]["__KING"]:GetChildren()
 end
 
 Tele:Line()
+
+
 Tele:Label("Teleport to Players....")
+
 for i, v in pairs(game:GetService("Players"):GetChildren()) do
     
     Tele:Button(v.Name, "", function()
-    local NewPlayerCFrame = v.Character.HumanoidRootPart.CFrame
+        local NewPlayerCFrame = v.Character.HumanoidRootPart.CFrame
         Player.Character.HumanoidRootPart.CFrame = NewPlayerCFrame  
     end)
 end
