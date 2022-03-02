@@ -35,6 +35,7 @@ Farm:Toggle("Auto Click", "", false, function(v)
     end)
 end)
 
+
 local Tele = w:Tab("Teleport", 8916381379)
 
 Tele:Label("Teleport to Position...")
@@ -61,8 +62,6 @@ end
 
 local Mics = w:Tab("Mics", 6031215984)
 
-Mics:Line()
-
 Mics:Toggle("Walk Speed", "", false, function(v)
     _G.Settings.walkSpeed = v
     task.spawn(function()
@@ -74,7 +73,7 @@ Mics:Toggle("Walk Speed", "", false, function(v)
 end)
 
 local walkspeed = 18
-Mics:Slider("WalkSpeed Amount", "",18, 1000, 0, function(v)
+Mics:Slider("WalkSpeed Amount", "", 18, 1000, 0, function(v)
     walkSpeed = v
 end)
 
