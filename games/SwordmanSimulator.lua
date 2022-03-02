@@ -43,9 +43,8 @@ Farm:Toggle("Auto Tp Kill", "", false, function(v)
         while task.wait() do
             if not _G.Settings.autoKill then break end
             for i, v in pairs(game:GetService("Players"):GetChildren()) do
-                local NewPlayer                          = v.Character.HumanoidRootPart.CFrame
-                wait(0.1)
-                Player.Character.HumanoidRootPart.CFrame = NewPlayer  
+                wait(0.13)
+                Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame 
             end
         end
     end)
@@ -78,7 +77,7 @@ for i, v in pairs(game:GetService("Players"):GetChildren()) do
 end
 
 
-local Mics = w:Tab("Mics", 6031215984)
+local Mics = w:Tab("Mics", 8916127218)
 
 Mics:Toggle("Walk Speed", "", false, function(v)
     _G.Settings.walkSpeed = v
@@ -95,3 +94,33 @@ Mics:Slider("WalkSpeed Amount", "", 18, 1000, 0, function(v)
     walkSpeed = v
 end)
 
+
+Mics:Line()
+
+Mics:Button("Rejoin", "", function()
+    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,game.JobId,game.Players.LocalPlayer)
+end)
+
+Mics:Button("Serverhop", "", function()
+    while task.wait() do
+        local Servers = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. game.PlaceId .. '/servers/Public?sortOrder=Asc&limit=100'))
+        for i,v in pairs(Servers.data) do
+            if v.id ~= game.JobId then
+                task.wait()
+                game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+            end
+        end
+    end
+end)
+
+Mics:Button("Serverhop Low Server", "", function()
+    while task.wait() do
+        local Servers = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. game.PlaceId .. '/servers/Public?sortOrder=Asc&limit=100'))
+        for i,v in pairs(Servers.data) do
+            if v.id ~= game.JobId and v.playing <= 3 then
+                task.wait()
+                game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+            end
+        end
+    end
+end)
