@@ -44,6 +44,7 @@ Farm:Toggle("Auto Tp Kill", "", false, function(v)
             if not _G.Settings.autoKill then break end
             for i, v in pairs(game:GetService("Players"):GetChildren()) do
                 local NewPlayer                          = v.Character.HumanoidRootPart.CFrame
+                wait(0.1)
                 Player.Character.HumanoidRootPart.CFrame = NewPlayer  
             end
         end
