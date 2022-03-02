@@ -13,7 +13,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Player            = game:GetService("Players").LocalPlayer
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/hunterlib.lua"))()
-local w       = library:Window("TrungB Scripts", "Anime Lifting Simulator", Color3.fromRGB(182, 0, 182), Enum.KeyCode.RightShift)
+local w       = library:Window("TrungB Scripts", "Swordman Simulator [RShift]", Color3.fromRGB(182, 0, 182), Enum.KeyCode.RightShift)
 
 
 local humanoid = game.Players.LocalPlayer.Character.Humanoid
