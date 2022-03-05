@@ -8,7 +8,8 @@ local link = {
     [5055081323] = games.."SwordmanSimulator.lua",
     [5670292785] = games.."UndeadDefenseTycoon.lua",
     [6875469709] = games.."StrongestPunchSim.lua",
-    [6953291455] = games.."EatingSimulator.lua"
+    [6953291455] = games.."EatingSimulator.lua",
+    [6531005851] = games.."LiftingTitans.lua"
 }
 
 for i, v in pairs(link) do
