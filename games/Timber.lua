@@ -75,6 +75,19 @@ local w       = library:Window("TrungB Scripts", "Timber [RShift]", Color3.fromR
 
 local humanoid = game.Players.LocalPlayer.Character.Humanoid
 
+local Home = w:Tab("Information", 6026568198)
+
+Home:Button("Games Active (Click me)", "", function()
+    library:Notification("  [+] Base Battles       - [+] Eating Simulator\n  [+] Anime Lifting    - [+] Anime Punching\n   [+] Swordman Sim  - [+] Strongest Punch \n [+] Rebirth ChampionX - [+] Lifting Titans\n         [+] Undead Defense Tycoon", "Thanks")
+end)
+
+Home:Line()
+
+Home:Button("Discord (Click)","", function()
+    setclipboard("TrungB#1230")
+    library:Notification("TrungB#1230", "Copied")
+end)
+
 local Farm = w:Tab("Farming", 6034287535)
 
 local tree = {}
@@ -102,6 +115,10 @@ Farm:Toggle("Auto Farm Legit (Kick < 10%)", "", false, function(v)
 			end
         end
     end)
+end)
+
+Farm:Button("Sell (Coming soon...)", "", function()
+	library:Notification("BRUHHH!", "Close")
 end)
 
 Farm:Dropdown("Select level mega tree", tree, function(v)
