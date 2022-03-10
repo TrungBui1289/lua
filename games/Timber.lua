@@ -36,21 +36,6 @@ local function getPlot()
    return plot
 end
 
-local function getBase(plot)
-	local base = nil
-	for a,x in next, plot:GetChildren() do
-		if x:IsA("Model") then
-			for l,d in next, x:GetChildren() do
-				if d.IsA("Part") and d.Name == "Base" then
-					base = d
-				end
-			end
-		end
-	end
-   
-	return base
-end
-
 local function getRandomTree(plot)
    local randomTree=nil
    local branch=nil
@@ -121,6 +106,8 @@ Farm:Button("Sell (Coming soon...)", "", function()
 	library:Notification("BRUHHH!", "Close")
 end)
 
+Farm:Line()
+
 Farm:Dropdown("Select level mega tree", tree, function(v)
 	selectedTree = v
 end)
@@ -170,6 +157,8 @@ Farm:Toggle("Auto Mini Tree (Must near mini tree)", "", false, function(v)
     end)
 end)
 
+Farm:Line()
+
 Farm:Toggle("Auto Buy Strength", "", false, function(v)
     _G.Settings.autoStrength = v
 	
@@ -187,15 +176,12 @@ end)
 
 local Tele = w:Tab("Teleport", 8916381379)
 
-Tele:Button("Tp to Base", "", function()
-	for i, v in next, workspace.Plots:GetChildren() do
-		if v:WaitForChild("Owner").Value == game.Players.LocalPlayer
-			or v:WaitForChild("Owner").Value == game.Players.LocalPlayer.Character then
-			if v:IsA("Model") then
-				humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-				wait(0.1)
-				tele(v:WaitForChild("Base"))
-			end
+Tele:Button("Back to base", "", function()
+	for i, v in pairs(getPlot()["0_0"]:GetChildren()) do
+		if v:IsA("Part") and v.Name == "Base" then
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			wait(0.3)
+			tele(v)
 		end
 	end
 end)
