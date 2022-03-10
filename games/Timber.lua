@@ -41,7 +41,7 @@ local function getBase(plot)
 	for a,x in next, plot:GetChildren() do
 		if x:IsA("Model") then
 			for l,d in next, x:GetChildren() do
-				if d.IsA("BasePart") then
+				if d.IsA("Part") and d.Name == "Base" then
 					base = d
 				end
 			end
@@ -96,11 +96,11 @@ Farm:Toggle("Auto Farm (May get kick)", "", false, function(v)
 			local plot = getPlot()
 			local choice, branch = getRandomTree(getPlot())
 			local treeNumber = string.gsub(choice.Name, "Tree_", "")
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(choice:WaitForChild("Base").Position)
+			game.Players.LocalPlayer.Character.Humanoid:MoveTo(choice:WaitForChild("Base").Position)
 			if choice ~= nil and branch ~= nil then
-				game:GetService("ReplicatedStorage").Communication.Remotes.HitTree:FireServer(plot.Name,tostring(branch),treeNumber)
+				ReplicatedStorage.Communication.Remotes.HitTree:FireServer(plot.Name,tostring(branch),treeNumber)
 			else
-				game.Players.LocalPlayer.Kick("The script may be outdated or bugged!")
+				Player.Kick("The script may be outdated or bugged!")
 			end
         end
     end)
@@ -113,26 +113,32 @@ end)
 Farm:Toggle("Auto Mega Tree", "", false, function(v)
     _G.Settings.autoMega = v
 	
+	for i, v in pairs(treeisland:GetDescendants()) do
+		if selectedTree == v.Name then
+			if v.Name == "1" then
+				tele(v.Base)
+				break
+			elseif v.Name == "2" then
+				tele(v.Base)
+				break
+			elseif v.Name == "3" then
+				tele(v.Base)
+				break
+			elseif v.Name == "4" then
+				tele(v.Base)
+				break
+			elseif v.Name == "5" then
+				tele(v.Base)
+				break
+			elseif v.Name == "6" then
+				tele(v.Base)
+				break
+			end
+		end
+	end
     task.spawn(function()
         while task.wait() do
             if not _G.Settings.autoMega then break end
-			for i, v in pairs(treeisland:GetDescendants()) do
-				if selectedTree == v.Name then
-					if v.Name == "1" then
-						tele(v.Base)
-					elseif v.Name == "2" then
-						tele(v.Base)
-					elseif v.Name == "3" then
-						tele(v.Base)
-					elseif v.Name == "4" then
-						tele(v.Base)
-					elseif v.Name == "5" then
-						tele(v.Base)
-					elseif v.Name == "6" then
-						tele(v.Base)
-					end
-				end
-			end
 			ReplicatedStorage.Communication.Remotes.HitMegaTree:FireServer(selectedTree)
         end
     end)
@@ -174,7 +180,6 @@ Tele:Button("Tp to Base", "", function()
 				humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 				wait(0.1)
 				tele(getBase(getPlot.Name))
-				print(v)
 			end
 		end
 	end
