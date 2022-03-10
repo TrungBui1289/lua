@@ -86,13 +86,13 @@ for i, v in pairs(game:GetService("Workspace").TreeIslands:GetChildren()) do
 	end
 end
 
-Farm:Toggle("Auto Farm (May get kick)", "", false, function(v)
+Farm:Toggle("Auto Farm Legit (Kick < 10%)", "", false, function(v)
     _G.Settings.autoFarm = v
 	
     task.spawn(function()
         while task.wait() do
             if not _G.Settings.autoFarm then break end
-			wait(1)
+			wait(0.7)
 			local plot = getPlot()
 			local choice, branch = getRandomTree(getPlot())
 			local treeNumber = string.gsub(choice.Name, "Tree_", "")
@@ -177,7 +177,7 @@ Tele:Button("Tp to Base", "", function()
 			if v:IsA("Model") then
 				humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 				wait(0.1)
-				tele(getBase(getPlot.Name))
+				tele(v:WaitForChild("Base"))
 			end
 		end
 	end
