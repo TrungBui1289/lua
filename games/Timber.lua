@@ -99,8 +99,6 @@ Farm:Toggle("Auto Farm (May get kick)", "", false, function(v)
 			game.Players.LocalPlayer.Character.Humanoid:MoveTo(choice:WaitForChild("Base").Position)
 			if choice ~= nil and branch ~= nil then
 				ReplicatedStorage.Communication.Remotes.HitTree:FireServer(plot.Name,tostring(branch),treeNumber)
-			else
-				Player.Kick("The script may be outdated or bugged!")
 			end
         end
     end)
