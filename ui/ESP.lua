@@ -1,5 +1,3 @@
-assert(Drawing, 'exploit not supported')
-
 if not syn and not PROTOSMASHER_LOADED then print'LoL!'
 local UserInputService	= game:GetService'UserInputService';
 local HttpService	= game:GetService'HttpService';
