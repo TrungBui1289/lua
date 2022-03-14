@@ -2314,7 +2314,7 @@ function Hunter:Window(text, bottom,mainclr,toclose)
 			Label.ClipsDescendants = true
 			Label.Position = UDim2.new(0.370312512, 0, 0.552631557, 0)
 			--Label.Size = UDim2.new(0, 457, 0, 43)
-			Label.Size = UDim2.new(120, 200, 0, 43)
+			Label.Size = UDim2.new(0, 200, 50, 43)
 			Label.AutoButtonColor = false
 			Label.Font = Enum.Font.SourceSans
 			Label.Text = ""
