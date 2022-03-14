@@ -120,7 +120,6 @@ Tele:Line()
 
 
 Tele:Line()
-Tele:Label("Teleport to Players....")
 
 for i, v in pairs(game:GetService("Players"):GetChildren()) do
     
