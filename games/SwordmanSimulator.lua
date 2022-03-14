@@ -8,6 +8,7 @@ _G.Settings = {
     autoTap   = false;
     autoUpgrade  = false;
     autoKill  = false;
+    autoTpPlr  = false;
     walkSpeed = false;
 }
 
@@ -87,7 +88,7 @@ Farm:Toggle("Auto Tp Kill", "", false, function(v)
         while task.wait() do
             if not _G.Settings.autoKill then break end
             for i, v in pairs(game:GetService("Players"):GetChildren()) do
-                wait(0.15)
+                wait(0.35)
                 Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame 
             end
         end
@@ -118,17 +119,32 @@ end
 
 Tele:Line()
 
-
-Tele:Line()
+local plr = {}
+local selectedPlr = {}
 
 for i, v in pairs(game:GetService("Players"):GetChildren()) do
-    
-    Tele:Button(v.Name, "", function()
-        local NewPlayerCFrame = v.Character.HumanoidRootPart.CFrame
-        Player.Character.HumanoidRootPart.CFrame = NewPlayerCFrame  
-    end)
+    table.insert(plr, v.Name)
 end
 
+
+Tele:Dropdown("Select Player", plr, function(v)
+    selectedPlr = v
+end)
+
+Tele:Toggle("Tele to player", "", false, function(v)
+    _G.Settings.autoTpPlr = v
+    task.spawn(function()
+        while task.wait() do
+            if not _G.Settings.autoTpPlr then break end
+            for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                if v.Name == selectedPlr then
+                    wait(0.2)
+                    Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame 
+                end
+            end
+        end
+    end)
+end)
 
 local Mics = w:Tab("Mics", 8916127218)
 
