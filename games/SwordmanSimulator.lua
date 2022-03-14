@@ -127,6 +127,16 @@ end)
 
 Tele:Line()
 
+for i, v in pairs(game:GetService("Workspace")["__MAP"]["__MACHINES"]:GetDescendants()) do
+	if v:IsA("Part") and v.Name == "Trigger" then
+		Tele:Button("Machine", "", function()
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			wait(0.1)
+			Player.Character.HumanoidRootPart.CFrame = v.CFrame
+		end)
+	end
+end
+
 for i,  v in pairs(game:GetService("Workspace")["__MAP"]["__KING"]:GetChildren()) do
     if v.Name == "Crown" then
         Tele:Button(v.Name, "", function()
