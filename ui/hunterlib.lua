@@ -202,7 +202,7 @@ function Hunter:Window(text, bottom,mainclr,toclose)
 				if uitoggled == false then
 					MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 					uitoggled = true
-					wait(.5)
+					wait(0.5)
 					HunterLib.Enabled = false
 				else
 					MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
@@ -2313,6 +2313,7 @@ function Hunter:Window(text, bottom,mainclr,toclose)
 			Label.BackgroundColor3 = Color3.fromRGB(64, 68, 75)
 			Label.ClipsDescendants = true
 			Label.Position = UDim2.new(0.370312512, 0, 0.552631557, 0)
+			--Label.Size = UDim2.new(0, 457, 0, 43)
 			Label.Size = UDim2.new(120, 200, 0, 43)
 			Label.AutoButtonColor = false
 			Label.Font = Enum.Font.SourceSans
@@ -2341,7 +2342,7 @@ function Hunter:Window(text, bottom,mainclr,toclose)
 		end
 		function ContainerContent:Textbox(text,desc,disapper,callback)
 			if desc == "" then
-				desc = "There is no description for this textbox."
+				desc = "No description."
 			end
 			local TextboxDescToggled = false
 			local Textbox = Instance.new("TextButton")
