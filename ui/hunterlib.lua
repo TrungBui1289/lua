@@ -2313,7 +2313,7 @@ function Hunter:Window(text, bottom,mainclr,toclose)
 			Label.BackgroundColor3 = Color3.fromRGB(64, 68, 75)
 			Label.ClipsDescendants = true
 			Label.Position = UDim2.new(0.370312512, 0, 0.552631557, 0)
-			Label.Size = UDim2.new(0, 200, 0, 120)
+			Label.Size = UDim2.new(120, 200, 0, 43)
 			Label.AutoButtonColor = false
 			Label.Font = Enum.Font.SourceSans
 			Label.Text = ""
