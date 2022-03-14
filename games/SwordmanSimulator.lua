@@ -97,27 +97,6 @@ end)
 
 local Tele = w:Tab("Teleport", 8916381379)
 
-for i,  v in pairs(game:GetService("Workspace")["__MAP"]["__KING"]:GetChildren()) do
-    if v.Name == "Crown" then
-        Tele:Button(v.Name, "", function()
-           humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-           wait(0.1)
-           Player.Character.HumanoidRootPart.CFrame = v.CFrame
-        end)
-   end
-end
-
-for i, v in pairs(game:GetService("Workspace")["__MAP"]["__WORLDS"]:GetChildren()) do
-	if v:IsA("Part") then
-		Tele:Button(v.Name, "", function()
-			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-			wait(0.1)
-			Player.Character.HumanoidRootPart.CFrame = v.CFrame
-		end)
-	end
-end
-
-Tele:Line()
 
 local plr = {}
 local selectedPlr = {}
@@ -138,13 +117,36 @@ Tele:Toggle("Tele to player", "", false, function(v)
             if not _G.Settings.autoTpPlr then break end
             for i, v in pairs(game:GetService("Players"):GetChildren()) do
                 if v.Name == selectedPlr then
-                    wait(0.2)
+                    wait(0.25)
                     Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame 
                 end
             end
         end
     end)
 end)
+
+Tele:Line()
+
+for i,  v in pairs(game:GetService("Workspace")["__MAP"]["__KING"]:GetChildren()) do
+    if v.Name == "Crown" then
+        Tele:Button(v.Name, "", function()
+           humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+           wait(0.1)
+           Player.Character.HumanoidRootPart.CFrame = v.CFrame
+        end)
+   end
+end
+
+for i, v in pairs(game:GetService("Workspace")["__MAP"]["__WORLDS"]:GetChildren()) do
+	if v:IsA("Part") then
+		Tele:Button(v.Name, "", function()
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			wait(0.1)
+			Player.Character.HumanoidRootPart.CFrame = v.CFrame
+		end)
+	end
+end
+
 
 local Mics = w:Tab("Mics", 8916127218)
 
