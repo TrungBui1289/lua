@@ -1,7 +1,5 @@
 assert(Drawing, 'exploit not supported')
 
-if not syn and not PROTOSMASHER_LOADED then print'Unnamed ESP only officially supports Synapse and Protosmasher! If you\'re an exploit developer and have added drawing API to your exploit, try setting syn as true then checking if that works, otherwise, DM me on discord @ cppbook.org#1968 or add an issue to the Unnamed ESP Github Repository and I\'ll see it through email!' end
-
 local UserInputService	= game:GetService'UserInputService';
 local HttpService	= game:GetService'HttpService';
 local GUIService	= game:GetService'GuiService';
@@ -40,16 +38,11 @@ local ErrorLogging	= false;
 local TracerPosition	= V2New(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y - 135);
 local DragTracerPosition= false;
 local SubMenu 		= {};
-local IsSynapse 	= syn and not PROTOSMASHER_LOADED;
 local Connections 	= { Active = {} };
 local Signal 		= {}; Signal.__index = Signal;
 local GetCharacter;
 local CurrentColorPicker;
 local Spectating;
-
-local Executor = (identifyexecutor or (function() return '' end))()
-local SupportedExploits = { 'Synapse X', 'ScriptWare', 'Krnl', 'OxygenU', 'Temple' }
-local QUAD_SUPPORTED_EXPLOIT = table.find(SupportedExploits, Executor) ~= nil
 
 -- if not PROTOSMASHER_LOADED then Drawing.UseCompatTransparency = true; end -- For Elysian
 
