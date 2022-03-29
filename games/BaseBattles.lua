@@ -126,6 +126,10 @@ local Mics = w:Tab("Mics", 6031215984)
 Mics:Button("ESP", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/ESP.lua"))()
 end)
+local bind = Enum.KeyCode.RightShift
+Mics:Bind("Destroy Gui", bind, function()
+    w:Destroy()
+end)
 
 Mics:Line()
 
