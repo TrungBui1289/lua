@@ -129,7 +129,7 @@ Mics:Button("ESP", "", function()
 end)
 
 Mics:Button("Destroy", "", function()
-    w:Destroy()
+    w:CloseBind()
 end)
 
 Mics:Line()
