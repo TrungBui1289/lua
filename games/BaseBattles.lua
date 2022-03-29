@@ -44,7 +44,7 @@ Battle:Button(
 --HitboxAmount
 local hitboxAmount = 15
 Battle:Slider(
-    "Hitbox Amount", "", 15, 50, 0,
+    "Hitbox Amount", "", 0, 50, 15,
     function(amount)
         hitboxAmount = amount
     end
