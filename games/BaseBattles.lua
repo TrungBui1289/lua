@@ -90,7 +90,7 @@ Battle:Button(
 )
 
 --inf ammo
-Battle:Bind("Infinity Ammo", "", Enum.KeyCode.C, function(v)
+Battle:Bind("Infinity Ammo", Enum.KeyCode.C, function(v)
 	if v == Enum.KeyCode.Name then
 	    for i, v in pairs(getgc(true)) do
 		if type(v) == "table" and rawget(v, "ammo") then
