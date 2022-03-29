@@ -129,6 +129,7 @@ Mics:Button("ESP", "", function()
 end)
 
 Mics:Bind("Destroy Gui", bind, function()
+    print("close")
     w:Destroy()
 end)
 
