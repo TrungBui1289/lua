@@ -94,16 +94,16 @@ Battle:Button(
 Battle:Toggle("Infinity Ammo", "", false, function(v)
     
     _G.Settings.inf = v
-    task.spawn(function()
-    	while task.wait() do
-	    if not _G.Settings.inf then break end	
-	    for i, v in pairs(getgc(true)) do
-		if type(v) == "table" and rawget(v, "ammo") then
+    for i, v in pairs(getgc(true)) do
+	if type(v) == "table" and rawget(v, "ammo") then
+	    task.spawn(function()
+		while task.wait() do
+		    if not _G.Settings.inf then break end	
 		    v.ammo = math.huge
 		end
-	    end
+	    end)
 	end
-    end)
+    end
 end)
 
 --Triggerbot
