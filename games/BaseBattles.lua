@@ -89,7 +89,7 @@ Battle:Button(
         end
     end
 )
-local key = Enum.KeyCode.C
+local key = Enum.KeyCode.F
 --inf ammo
 Battle:Bind("Infinity Ammo", key, function()
     for i, v in pairs(getgc(true)) do
