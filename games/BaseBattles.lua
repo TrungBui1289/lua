@@ -4,7 +4,6 @@ print("------------------------------")
 
 _G.Settings = {
     trigger     = false;
-    inf     = false;
     walkSpeed     = false;
 }
 
@@ -91,19 +90,14 @@ Battle:Button(
 )
 
 --inf ammo
-Battle:Toggle("Infinity Ammo", "", false, function(v)
-    
-    _G.Settings.inf = v
-    for i, v in pairs(getgc(true)) do
-	if type(v) == "table" and rawget(v, "ammo") then
-	    task.spawn(function()
-		while task.wait() do
-		    if not _G.Settings.inf then break end	
-		    v.ammo = math.huge
+Battle:Bind("Infinity Ammo", "", Enum.KeyCode.C, function(v)
+	if v == Enum.KeyCode.Name then
+	    for i, v in pairs(getgc(true)) do
+		if type(v) == "table" and rawget(v, "ammo") then
+			v.ammo = math.huge
 		end
-	    end)
+	    end
 	end
-    end
 end)
 
 --Triggerbot
