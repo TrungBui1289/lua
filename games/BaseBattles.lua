@@ -93,10 +93,10 @@ Battle:Button(
 --inf ammo
 Battle:Toggle("Infinity Ammo", "", false, function(v)
     
-    _G.Settings.walkSpeed = v
+    _G.Settings.inf = v
     task.spawn(function()
     	while task.wait() do
-	    if not _G.Settings.walkSpeed then break end	
+	    if not _G.Settings.inf then break end	
 	    for i, v in pairs(getgc(true)) do
 		if type(v) == "table" and rawget(v, "ammo") then
 		    v.ammo = math.huge
@@ -148,6 +148,6 @@ Mics:Toggle("Walk Speed", "", false, function(v)
 end)
 
 local walkspeed = 18
-Mics:Slider("WalkSpeed Amount", "",18, 1000, 0, function(v)
+Mics:Slider("WalkSpeed Amount", "",0, 1000, 18, function(v)
     walkSpeed = v
 end)
