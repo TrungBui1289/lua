@@ -59,20 +59,25 @@ Battle:Button(
             getgenv().Disabled = true
 
             if getgenv().Disabled then
-                for i, v in next, game:GetService("Players"):GetPlayers() do
-                    if v.Name ~= game:GetService("Players").LocalPlayer.Name then
-                        pcall(
-                            function()
-                                v.Character.HumanoidRootPart.Name = "xC6M3Vuz7QpsY5nv"
-                                v.Character.xC6M3Vuz7QpsY5nv.Size =
-                                    Vector3.new(getgenv().HeadSize - 1, getgenv().HeadSize + 1, getgenv().HeadSize - 1)
-                                v.Character.xC6M3Vuz7QpsY5nv.Transparency = 0.6
-                                v.Character.xC6M3Vuz7QpsY5nv.CanCollide = false
-                                v.Character.xC6M3Vuz7QpsY5nv.Color = Color3.fromRGB(145, 133, 99)
-                            end
-                        )
-                    end
-                end
+                -- loop
+		game:GetService("RunService").Stepped:Connect(function()
+		    -- gets all players in the server
+		    for _, player in next, game:GetService("Players"):GetPlayers() do
+			-- checks if the player found was not the local player, so the local player doesnt get his hitbox extended
+			if player ~= game:GetService("Players").LocalPlayer then
+			    -- finds humanoid root part, then changes transparecy and can collide so you can walk through the hitbox and it wont be wonky
+			    if player.Character:FindFirstChild("HumanoidRootPart") then
+				player.Character["HumanoidRootPart"].CanCollide = false
+				player.Character["HumanoidRootPart"].Transparency = 0.5
+			    end
+
+			    -- changes the humanoidrootpart size (basically the main code)
+			    if player.Character["HumanoidRootPart"].Size ~= Vector3.new(getgenv().HeadSize, getgenv().HeadSize, getgenv().HeadSize) then
+				player.Character["HumanoidRootPart"].Size = Vector3.new(getgenv().HeadSize, getgenv().HeadSize, getgenv().HeadSize)
+			    end
+			end
+		    end
+		end)
             end
         end
     end
