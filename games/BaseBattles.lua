@@ -88,10 +88,10 @@ Battle:Button(
         end
     end
 )
-
+local key = Enum.KeyCode.C
 --inf ammo
-Battle:Bind("Infinity Ammo", Enum.KeyCode.C, function(k)
-	if k == Enum.KeyCode.Name then
+Battle:Bind("Infinity Ammo", key, function(k)
+	if k == key.Name then
 	    for i, v in pairs(getgc(true)) do
 		if type(v) == "table" and rawget(v, "ammo") then
 			v.ammo = math.huge
