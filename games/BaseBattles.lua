@@ -4,6 +4,7 @@ print("------------------------------")
 
 _G.Settings = {
     trigger     = false;
+    inf     = false;
     walkSpeed     = false;
 }
 
@@ -90,12 +91,19 @@ Battle:Button(
 )
 
 --inf ammo
-Battle:Button("Infinity Ammo", "", function()
-    for i, v in pairs(getgc(true)) do
-        if type(v) == "table" and rawget(v, "ammo") then
-            v.ammo = math.huge
-        end
-    end
+Battle:Toggle("Infinity Ammo", "", false, function(v)
+    
+    _G.Settings.walkSpeed = v
+    task.spawn(function()
+    	while task.wait() do
+	    if not _G.Settings.walkSpeed then break end	
+	    for i, v in pairs(getgc(true)) do
+		if type(v) == "table" and rawget(v, "ammo") then
+		    v.ammo = math.huge
+		end
+	    end
+	end
+    end)
 end)
 
 --Triggerbot
