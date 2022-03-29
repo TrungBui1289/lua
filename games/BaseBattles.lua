@@ -58,6 +58,7 @@ Battle:Button(
 	    	wait(0.1)	
 		-- loop
 		getgenv().HeadSize = hitboxAmount
+		getgenv().Disabled = true
 		game:GetService("RunService").Stepped:Connect(function()
 		    -- gets all players in the server
 		    for _, player in next, game:GetService("Players"):GetPlayers() do
