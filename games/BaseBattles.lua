@@ -128,8 +128,7 @@ Mics:Button("ESP", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/ESP.lua"))()
 end)
 
-Mics:Bind("Destroy Gui", bind, function()
-    print("close")
+Mics:Button("Destroy Gui", "", function()
     w:Destroy()
 end)
 
