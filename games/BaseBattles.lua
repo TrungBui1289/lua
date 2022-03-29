@@ -6,9 +6,10 @@ _G.Settings = {
     trigger     = false;
     walkSpeed     = false;
 }
+local bind = Enum.KeyCode.RightShift
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/hunterlib.lua"))()
-local w       = library:Window("TrungB Scripts", "BaseBattles [RShift]", Color3.fromRGB(182, 0, 182), Enum.KeyCode.RightShift)
+local w       = library:Window("TrungB Scripts", "BaseBattles [RShift]", Color3.fromRGB(182, 0, 182), bind)
 
 local player = game:GetService("Players").LocalPlayer
 local mouse = player:GetMouse()
@@ -126,7 +127,7 @@ local Mics = w:Tab("Mics", 6031215984)
 Mics:Button("ESP", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/ESP.lua"))()
 end)
-local bind = Enum.KeyCode.RightShift
+
 Mics:Bind("Destroy Gui", bind, function()
     w:Destroy()
 end)
