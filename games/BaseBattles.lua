@@ -128,10 +128,6 @@ Mics:Button("ESP", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/ESP.lua"))()
 end)
 
-Mics:Button("Destroy", "", function()
-    w.CloseBind()
-end)
-
 Mics:Line()
 
 Mics:Toggle("Walk Speed", "", false, function(v)
