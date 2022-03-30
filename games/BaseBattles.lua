@@ -70,7 +70,7 @@ Battle:Button(
 		    end		
 		    -- changes the humanoidrootpart size (basically the main code)
 		    if player.Character["HumanoidRootPart"].Size ~= Vector3.new(getgenv().HeadSize, getgenv().HeadSize, getgenv().HeadSize) then
-			player.Character["HumanoidRootPart"].Size = Vector3.new(getgenv().HeadSize, 4, getgenv().HeadSize)
+			player.Character["HumanoidRootPart"].Size = Vector3.new(getgenv().HeadSize, getgenv().HeadSize, getgenv().HeadSize)
 		    end
 		end
 	    end
