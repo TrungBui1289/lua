@@ -420,22 +420,6 @@ Options('ResetSettings', 'Reset Settings', function()
 			Options[i](Options[i].DefaultValue, true);
 		end
 	end
-end, 5);
-Options('LoadSettings', 'Load Settings', Load, 4);
-Options('SaveSettings', 'Save Settings', function()
-	local COptions = {};
-
-	for i, v in pairs(Options) do
-		COptions[i] = v;
-	end
-	
-	if typeof(TeamColor) == 'Color3' then COptions.TeamColor = { R = TeamColor.R; G = TeamColor.G; B = TeamColor.B } end
-	if typeof(EnemyColor) == 'Color3' then COptions.EnemyColor = { R = EnemyColor.R; G = EnemyColor.G; B = EnemyColor.B } end
-	
-	if typeof(COptions.MenuKey.Value) == 'EnumItem' then COptions.MenuKey = COptions.MenuKey.Value.Name end
-	if typeof(COptions.ToggleKey.Value) == 'EnumItem' then COptions.ToggleKey = COptions.ToggleKey.Value.Name end
-
-	writefile(OptionsFile, HttpService:JSONEncode(COptions));
 end, 3);
 
 Load(1);
@@ -964,13 +948,13 @@ function CreateMenu(NewPosition) -- Create Menu
 
 	Menu:AddMenuInstance('CrosshairX', 'Line', {
 		Visible			= false;
-		Color			= Color3.new(0, 1, 0);
+		Color			= Color3.new(0, 1, 1);
 		Transparency	= 1;
 		Thickness		= 1;
 	});
 	Menu:AddMenuInstance('CrosshairY', 'Line', {
 		Visible			= false;
-		Color			= Color3.new(0, 1, 0);
+		Color			= Color3.new(0, 1, 1);
 		Transparency	= 1;
 		Thickness		= 1;
 	});
