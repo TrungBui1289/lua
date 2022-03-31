@@ -20,7 +20,6 @@ local OptionsFile	= 'IC3_ESP_SETTINGS.dat';
 local Binding		= false;
 local BindedKey		= nil;
 local OIndex		= 0;
-local LineBox		= {};
 local UIButtons		= {};
 local Sliders		= {};
 local ColorPicker	= { Loading = false; LastGenerated = 0 };
@@ -97,84 +96,7 @@ end
 
 local Teams = {};
 local CustomTeams = { -- Games that don't use roblox's team system
-	[2563455047] = {
-		Initialize = function()
-			Teams.Sheriffs = {}; -- prevent big error
-			Teams.Bandits = {}; -- prevent big error
-			local Func = game:GetService'ReplicatedStorage':WaitForChild('RogueFunc', 1);
-			local Event = game:GetService'ReplicatedStorage':WaitForChild('RogueEvent', 1);
-			local S, B = Func:InvokeServer'AllTeamData';
-
-			Teams.Sheriffs = S;
-			Teams.Bandits = B;
-
-			Event.OnClientEvent:Connect(function(id, PlayerName, Team, Remove) -- stolen straight from decompiled src lul
-				if id == 'UpdateTeam' then
-					local TeamTable, NotTeamTable
-					if Team == 'Bandits' then
-						TeamTable = TDM.Bandits
-						NotTeamTable = TDM.Sheriffs
-					else
-						TeamTable = TDM.Sheriffs
-						NotTeamTable = TDM.Bandits
-					end
-					if Remove then
-						TeamTable[PlayerName] = nil
-					else
-						TeamTable[PlayerName] = true
-						NotTeamTable[PlayerName] = nil
-					end
-					if PlayerName == LocalPlayer.Name then
-						TDM.Friendlys = TeamTable
-						TDM.Enemies = NotTeamTable
-					end
-				end
-			end)
-		end;
-		CheckTeam = function(Player)
-			local LocalTeam = Teams.Sheriffs[LocalPlayer.Name] and Teams.Sheriffs or Teams.Bandits;
-			
-			return LocalTeam[Player.Name] and true or false;
-		end;
-	};
-	[5208655184] = {
-		CheckTeam = function(Player)
-			local LocalLastName = LocalPlayer:GetAttribute'LastName' if not LocalLastName or IsStringEmpty(LocalLastName) then return true end
-			local PlayerLastName = Player:GetAttribute'LastName' if not PlayerLastName then return false end
-
-			return PlayerLastName == LocalLastName
-		end
-	};
-	[3541987450] = {
-		CheckTeam = function(Player)
-			local LocalStats = LocalPlayer:FindFirstChild'leaderstats';
-			local LocalLastName = LocalStats and LocalStats:FindFirstChild'LastName'; if not LocalLastName or IsStringEmpty(LocalLastName.Value) then return true; end
-			local PlayerStats = Player:FindFirstChild'leaderstats';
-			local PlayerLastName = PlayerStats and PlayerStats:FindFirstChild'LastName'; if not PlayerLastName then return false; end
-
-			return PlayerLastName.Value == LocalLastName.Value;
-		end;
-	};
-    [6032399813] = {
-		CheckTeam = function(Player)
-			local LocalStats = LocalPlayer:FindFirstChild'leaderstats';
-			local LocalGuildName = LocalStats and LocalStats:FindFirstChild'Guild'; if not LocalGuildName or IsStringEmpty(LocalGuildName.Value) then return true; end
-			local PlayerStats = Player:FindFirstChild'leaderstats';
-			local PlayerGuildName = PlayerStats and PlayerStats:FindFirstChild'Guild'; if not PlayerGuildName then return false; end
-
-			return PlayerGuildName.Value == LocalGuildName.Value;
-		end;
-	};
-    [5735553160] = {
-		CheckTeam = function(Player)
-			local LocalStats = LocalPlayer:FindFirstChild'leaderstats';
-			local LocalGuildName = LocalStats and LocalStats:FindFirstChild'Guild'; if not LocalGuildName or IsStringEmpty(LocalGuildName.Value) then return true; end
-			local PlayerStats = Player:FindFirstChild'leaderstats';
-			local PlayerGuildName = PlayerStats and PlayerStats:FindFirstChild'Guild'; if not PlayerGuildName then return false; end
-
-			return PlayerGuildName.Value == LocalGuildName.Value;
-		end;
-	};
+	
 };
 
 local RenderList = {Instances = {}};
@@ -260,308 +182,6 @@ local Modules = {
 
 		CustomRootPartName = 'Torso',
 	};
-	[2950983942] = {
-		CustomCharacter = function(Player)
-			if workspace:FindFirstChild'Players' then
-				return workspace.Players:FindFirstChild(Player.Name);
-			end
-		end
-	};
-	[2262441883] = {
-		CustomPlayerTag = function(Player)
-			return Player:FindFirstChild'Job' and (' [' .. Player.Job.Value .. ']') or '';
-		end;
-		CustomESP = function()
-			if workspace:FindFirstChild'MoneyPrinters' then
-				for i, v in pairs(workspace.MoneyPrinters:GetChildren()) do
-					local Main	= v:FindFirstChild'Main';
-					local Owner	= v:FindFirstChild'TrueOwner';
-					local Money	= v:FindFirstChild'Int' and v.Int:FindFirstChild'Money' or nil;
-					if Main and Owner and Money then
-						local O = tostring(Owner.Value);
-						local M = tostring(Money.Value);
-
-						pcall(RenderList.AddOrUpdateInstance, RenderList, v, Main, string.format('Money Printer\nOwned by %s\n[%s]', O, M), Color3.fromRGB(13, 255, 227));
-					end
-				end
-			end
-		end;
-	};
-	-- [4581966615] = {
-	-- 	CustomESP = function()
-	-- 		if workspace:FindFirstChild'Entities' then
-	-- 			for i, v in pairs(workspace.Entities:GetChildren()) do
-	-- 				if not v.Name:match'Printer' then continue end
-
-	-- 				local Properties = v:FindFirstChild'Properties' if not Properties then continue end
-	-- 				local Main	= v:FindFirstChild'hitbox';
-	-- 				local Owner	= Properties:FindFirstChild'Owner';
-	-- 				local Money	= Properties:FindFirstChild'CurrentPrinted'
-					
-	-- 				if Main and Owner and Money then
-	-- 					local O = Owner.Value and tostring(Owner.Value) or 'no one';
-	-- 					local M = tostring(Money.Value);
-
-	-- 					pcall(RenderList.AddOrUpdateInstance, RenderList, v, Main, string.format('Money Printer\nOwned by %s\n[%s]', O, M), Color3.fromRGB(13, 255, 227));
-	-- 				end
-	-- 			end
-	-- 		end
-	-- 	end;
-	-- };
-	[4801598506] = {
-		CustomESP = function()
-			if workspace:FindFirstChild'Mobs' and workspace.Mobs:FindFirstChild'Forest1' then
-				for i, v in pairs(workspace.Mobs.Forest1:GetChildren()) do
-					local Main	= v:FindFirstChild'Head';
-					local Hum	= v:FindFirstChild'Mob';
-
-					if Main and Hum then
-						pcall(RenderList.AddOrUpdateInstance, RenderList, v, Main, string.format('[%s] [%s/%s]', v.Name, Hum.Health, Hum.MaxHealth), Color3.fromRGB(13, 255, 227));
-					end
-				end
-			end
-		end;
-	};
-	[2555873122] = {
-		CustomESP = function()
-			if workspace:FindFirstChild'WoodPlanks' then
-				for i, v in pairs(workspace:GetChildren()) do
-					if v.Name == 'WoodPlanks' then
-						local Main = v:FindFirstChild'Wood';
-
-						if Main then
-							pcall(RenderList.AddOrUpdateInstance, RenderList, v, Main, 'Wood Planks', Color3.fromRGB(13, 255, 227));
-						end
-					end
-				end
-			end
-		end;
-	};
-	[5208655184] = {
-		CustomESP = function()
-			-- if workspace:FindFirstChild'Live' then
-			-- 	for i, v in pairs(workspace.Live:GetChildren()) do
-			-- 		if v.Name:sub(1, 1) == '.' then
-			-- 			local Main = v:FindFirstChild'Head';
-
-			-- 			if Main then
-			-- 				pcall(RenderList.AddOrUpdateInstance, RenderList, v, Main, v.Name:sub(2), Color3.fromRGB(250, 50, 40));
-			-- 			end
-			-- 		end
-			-- 	end
-			-- end
-		end;
-		CustomPlayerTag = function(Player)
-			if game.PlaceVersion < 457 then return '' end
-
-			local Name = '';
-			local FirstName = Player:GetAttribute'FirstName'
-
-			if typeof(FirstName) == 'string' and #FirstName > 0 then
-				local Prefix = '';
-				local Extra = {};
-				Name = Name .. '\n[';
-
-				if Player:GetAttribute'Prestige' > 0 then
-					Name = Name .. '#' .. tostring(Player:GetAttribute'Prestige') .. ' ';
-				end
-				if not IsStringEmpty(Player:GetAttribute'HouseRank') then
-					Prefix = Player:GetAttribute'HouseRank' == 'Owner' and (Player:GetAttribute'Gender' == 'Female' and 'Lady ' or 'Lord ') or '';
-				end
-				if not IsStringEmpty(FirstName) then
-					Name = Name .. '' .. Prefix .. FirstName;
-				end
-				if not IsStringEmpty(Player:GetAttribute'LastName') then
-					Name = Name .. ' ' .. Player:GetAttribute'LastName';
-				end
-
-				if not IsStringEmpty(Name) then Name = Name .. ']'; end
-
-				local Character = GetCharacter(Player);
-
-				if Character then
-					if Character and Character:FindFirstChild'Danger' then table.insert(Extra, 'D'); end
-					if Character:FindFirstChild'ManaAbilities' and Character.ManaAbilities:FindFirstChild'ManaSprint' then table.insert(Extra, 'D1'); end
-
-					if Character:FindFirstChild'Mana'	 		then table.insert(Extra, 'M' .. math.floor(Character.Mana.Value)); end
-					if Character:FindFirstChild'Vampirism' 		then table.insert(Extra, 'V'); end
-					if Character:FindFirstChild'Observe'		then table.insert(Extra, 'ILL'); end
-					if Character:FindFirstChild'Inferi'			then table.insert(Extra, 'NEC'); end
-					if Character:FindFirstChild'World\'s Pulse' then table.insert(Extra, 'DZIN'); end
-					if Character:FindFirstChild'Shift'		 	then table.insert(Extra, 'MAD'); end
-					if Character:FindFirstChild'Head' and Character.Head:FindFirstChild'FacialMarking' then
-						local FM = Character.Head:FindFirstChild'FacialMarking';
-						if FM.Texture == 'http://www.roblox.com/asset/?id=4072968006' then
-							table.insert(Extra, 'HEALER');
-						elseif FM.Texture == 'http://www.roblox.com/asset/?id=4072914434' then
-							table.insert(Extra, 'SEER');
-						elseif FM.Texture == 'http://www.roblox.com/asset/?id=4094417635' then
-							table.insert(Extra, 'JESTER');
-						elseif FM.Texture == 'http://www.roblox.com/asset/?id=4072968656' then
-							table.insert(Extra, 'BLADE');
-						end
-					end
-				end
-				if Player:FindFirstChild'Backpack' then
-					if Player.Backpack:FindFirstChild'Observe' 			then table.insert(Extra, 'ILL');  end
-					if Player.Backpack:FindFirstChild'Inferi'			then table.insert(Extra, 'NEC');  end
-					if Player.Backpack:FindFirstChild'World\'s Pulse' 	then table.insert(Extra, 'DZIN'); end
-					if Player.Backpack:FindFirstChild'Shift'		 	then table.insert(Extra, 'MAD'); end
-				end
-
-				if #Extra > 0 then Name = Name .. ' [' .. table.concat(Extra, '-') .. ']'; end
-			end
-
-			return Name;
-		end;
-	};
-	[3541987450] = {
-		CustomPlayerTag = function(Player)
-			local Name = '';
-
-			if Player:FindFirstChild'leaderstats' then
-				Name = Name .. '\n[';
-				local Prefix = '';
-				local Extra = {};
-				if Player.leaderstats:FindFirstChild'Prestige' and Player.leaderstats.Prestige.ClassName == 'IntValue' and Player.leaderstats.Prestige.Value > 0 then
-					Name = Name .. '#' .. tostring(Player.leaderstats.Prestige.Value) .. ' ';
-				end
-				if Player.leaderstats:FindFirstChild'HouseRank' and Player.leaderstats:FindFirstChild'Gender' and Player.leaderstats.HouseRank.ClassName == 'StringValue' and not IsStringEmpty(Player.leaderstats.HouseRank.Value) then
-					Prefix = Player.leaderstats.HouseRank.Value == 'Owner' and (Player.leaderstats.Gender.Value == 'Female' and 'Lady ' or 'Lord ') or '';
-				end
-				if Player.leaderstats:FindFirstChild'FirstName' and Player.leaderstats.FirstName.ClassName == 'StringValue' and not IsStringEmpty(Player.leaderstats.FirstName.Value) then
-					Name = Name .. '' .. Prefix .. Player.leaderstats.FirstName.Value;
-				end
-				if Player.leaderstats:FindFirstChild'LastName' and Player.leaderstats.LastName.ClassName == 'StringValue' and not IsStringEmpty(Player.leaderstats.LastName.Value) then
-					Name = Name .. ' ' .. Player.leaderstats.LastName.Value;
-				end
-				if Player.leaderstats:FindFirstChild'UberTitle' and Player.leaderstats.UberTitle.ClassName == 'StringValue' and not IsStringEmpty(Player.leaderstats.UberTitle.Value) then
-					Name = Name .. ', ' .. Player.leaderstats.UberTitle.Value;
-				end
-
-				if not IsStringEmpty(Name) then Name = Name .. ']'; end
-
-				local Character = GetCharacter(Player);
-
-				if Character then
-					if Character and Character:FindFirstChild'Danger' then table.insert(Extra, 'D'); end
-					if Character:FindFirstChild'ManaAbilities' and Character.ManaAbilities:FindFirstChild'ManaSprint' then table.insert(Extra, 'D1'); end
-
-					if Character:FindFirstChild'Mana'	 		then table.insert(Extra, 'M' .. math.floor(Character.Mana.Value)); end
-					if Character:FindFirstChild'Vampirism' 		then table.insert(Extra, 'V');    end
-					if Character:FindFirstChild'Observe'			then table.insert(Extra, 'ILL');  end
-					if Character:FindFirstChild'Inferi'			then table.insert(Extra, 'NEC');  end
-					
-					if Character:FindFirstChild'World\'s Pulse' 	then table.insert(Extra, 'DZIN'); end
-					if Character:FindFirstChild'Head' and Character.Head:FindFirstChild'FacialMarking' then
-						local FM = Character.Head:FindFirstChild'FacialMarking';
-						if FM.Texture == 'http://www.roblox.com/asset/?id=4072968006' then
-							table.insert(Extra, 'HEALER');
-						elseif FM.Texture == 'http://www.roblox.com/asset/?id=4072914434' then
-							table.insert(Extra, 'SEER');
-						elseif FM.Texture == 'http://www.roblox.com/asset/?id=4094417635' then
-							table.insert(Extra, 'JESTER');
-						end
-					end
-				end
-				if Player:FindFirstChild'Backpack' then
-					if Player.Backpack:FindFirstChild'Observe' 			then table.insert(Extra, 'ILL');  end
-					if Player.Backpack:FindFirstChild'Inferi'			then table.insert(Extra, 'NEC');  end
-					if Player.Backpack:FindFirstChild'World\'s Pulse' 	then table.insert(Extra, 'DZIN'); end
-				end
-
-				if #Extra > 0 then Name = Name .. ' [' .. table.concat(Extra, '-') .. ']'; end
-			end
-
-			return Name;
-		end;
-	};
-
-	[4691401390] = { -- Vast Realm
-		CustomCharacter = function(Player)
-			if workspace:FindFirstChild'Players' then
-				return workspace.Players:FindFirstChild(Player.Name);
-			end
-		end
-	};
-
-    [6032399813] = { -- Deepwoken [Etrean]
-		CustomPlayerTag = function(Player)
-			local Name = '';
-            CharacterName = Player:GetAttribute'CharacterName'; -- could use leaderstats but lazy
-
-            if not IsStringEmpty(CharacterName) then
-                Name = ('\n[%s]'):format(CharacterName);
-                local Character = GetCharacter(Player);
-                local Extra = {};
-
-                if Character then
-                    local Blood, Armor = Character:FindFirstChild('Blood'), Character:FindFirstChild('Armor');
-
-                    if Blood and Blood.ClassName == 'DoubleConstrainedValue' then
-                        table.insert(Extra, ('B%d'):format(Blood.Value));
-                    end
-
-                    if Armor and Armor.ClassName == 'DoubleConstrainedValue' then
-                        table.insert(Extra, ('A%d'):format(math.floor(Armor.Value / 10)));
-                    end
-                end
-
-                local BackpackChildren = Player.Backpack:GetChildren()
-
-                for index = 1, #BackpackChildren do
-                    local Oath = BackpackChildren[index]
-                    if Oath.ClassName == 'Folder' and Oath.Name:find('Talent:Oath') then
-                        local OathName = Oath.Name:gsub('Talent:Oath: ', '')
-                        table.insert(Extra, OathName);
-                    end
-                end
-
-                if #Extra > 0 then Name = Name .. ' [' .. table.concat(Extra, '-') .. ']'; end
-            end
-
-			return Name;
-		end;
-	};
-
-    [5735553160] = { -- Deepwoken [Depths]
-    CustomPlayerTag = function(Player)
-        local Name = '';
-        CharacterName = Player:GetAttribute'CharacterName'; -- could use leaderstats but lazy
-
-        if not IsStringEmpty(CharacterName) then
-            Name = ('\n[%s]'):format(CharacterName);
-            local Character = GetCharacter(Player);
-            local Extra = {};
-
-            if Character then
-                local Blood, Armor = Character:FindFirstChild('Blood'), Character:FindFirstChild('Armor');
-
-                if Blood and Blood.ClassName == 'DoubleConstrainedValue' then
-                    table.insert(Extra, ('B%d'):format(Blood.Value));
-                end
-
-                if Armor and Armor.ClassName == 'DoubleConstrainedValue' then
-                    table.insert(Extra, ('A%d'):format(math.floor(Armor.Value / 10)));
-                end
-            end
-
-            local BackpackChildren = Player.Backpack:GetChildren()
-
-            for index = 1, #BackpackChildren do
-                local Oath = BackpackChildren[index]
-                if Oath.ClassName == 'Folder' and Oath.Name:find('Talent:Oath') then
-                    local OathName = Oath.Name:gsub('Talent:Oath: ', '')
-                    table.insert(Extra, OathName);
-                end
-            end
-
-            if #Extra > 0 then Name = Name .. ' [' .. table.concat(Extra, '-') .. ']'; end
-        end
-
-        return Name;
-    end;
-};
 };
 
 if Modules[game.PlaceId] ~= nil then
@@ -733,9 +353,7 @@ Options('ShowTeamColor', 'Show Team Color', false);
 Options('ShowName', 'Show Names', true);
 Options('ShowDistance', 'Show Distance', true);
 Options('ShowHealth', 'Show Health', true);
-Options('ShowBoxes', 'Show Boxes', true);
 Options('ShowTracers', 'Show Tracers', true);
-Options('ShowDot', 'Show Head Dot', false);
 Options('VisCheck', 'Visibility Check', false);
 Options('Crosshair', 'Crosshair', false);
 Options('TextOutline', 'Text Outline', true);
@@ -836,195 +454,6 @@ local function Combine(...)
 	return Output
 end
 
-function LineBox:Create(Properties)
-	local Box = { Visible = true }; -- prevent errors not really though dont worry bout the Visible = true thing
-
-	local Properties = Combine({
-		Transparency	= 1;
-		Thickness		= 3;
-		Visible			= true;
-	}, Properties);
-
-	if shared.am_ic3 then -- sory just my preference, dynamic boxes will be optional in unnamed esp v2
-		Box['OutlineSquare']= NewDrawing'Square'(Properties);
-		Box['Square'] 		= NewDrawing'Square'(Properties);
-	elseif QUAD_SUPPORTED_EXPLOIT then
-		Box['Quad']			= NewDrawing'Quad'(Properties);
-	else
-		Box['TopLeft']		= NewDrawing'Line'(Properties);
-		Box['TopRight']		= NewDrawing'Line'(Properties);
-		Box['BottomLeft']	= NewDrawing'Line'(Properties);
-		Box['BottomRight']	= NewDrawing'Line'(Properties);
-	end
-
-	function Box:Update(CF, Size, Color, Properties, Parts)
-		if not CF or not Size then return end
-
-		if shared.am_ic3 and typeof(Parts) == 'table' then
-			local AllCorners = {};
-			
-			for i, v in pairs(Parts) do
-				-- if not v:IsA'BasePart' then continue end
-				
-				local CF, Size = v.CFrame, v.Size;
-				-- CF, Size = v.Parent:GetBoundingBox();
-
-				local Corners = {
-					Vector3.new(CF.X + Size.X / 2, CF.Y + Size.Y / 2, CF.Z + Size.Z / 2);
-					Vector3.new(CF.X - Size.X / 2, CF.Y + Size.Y / 2, CF.Z + Size.Z / 2);
-					Vector3.new(CF.X - Size.X / 2, CF.Y - Size.Y / 2, CF.Z - Size.Z / 2);
-					Vector3.new(CF.X + Size.X / 2, CF.Y - Size.Y / 2, CF.Z - Size.Z / 2);
-					Vector3.new(CF.X - Size.X / 2, CF.Y + Size.Y / 2, CF.Z - Size.Z / 2);
-					Vector3.new(CF.X + Size.X / 2, CF.Y + Size.Y / 2, CF.Z - Size.Z / 2);
-					Vector3.new(CF.X - Size.X / 2, CF.Y - Size.Y / 2, CF.Z + Size.Z / 2);
-					Vector3.new(CF.X + Size.X / 2, CF.Y - Size.Y / 2, CF.Z + Size.Z / 2);
-				};
-
-				for i, v in pairs(Corners) do
-					table.insert(AllCorners, v);
-				end
-
-				-- break
-			end
-
-			local xMin, yMin = Camera.ViewportSize.X, Camera.ViewportSize.Y;
-			local xMax, yMax = 0, 0;
-			local Vs = true;
-
-			for i, v in pairs(AllCorners) do				
-				local Position, V = WorldToViewport(v);
-
-				if VS and not V then Vs = false break end
-
-				if Position.X > xMax then
-					xMax = Position.X;
-				end
-				if Position.X < xMin then
-					xMin = Position.X;
-				end
-				if Position.Y > yMax then
-					yMax = Position.Y;
-				end
-				if Position.Y < yMin then
-					yMin = Position.Y;
-				end
-			end
-
-			local xSize, ySize = xMax - xMin, yMax - yMin;
-
-			local Outline = Box['OutlineSquare'];
-			local Square = Box['Square'];
-			Outline.Visible = Vs;
-			Square.Visible = Vs;
-			Square.Position = V2New(xMin, yMin);
-			Square.Color	= Color;
-			Square.Thickness = math.floor(Outline.Thickness * 0.3);
-			-- Square.Position = V2New(xMin, yMin);
-			Square.Size = V2New(xSize, ySize);
-			Outline.Position = Square.Position;
-			Outline.Size = Square.Size;
-			Outline.Color = Color3.new(0.12, 0.12, 0.12);
-			Outline.Transparency = 0.75;
-
-			return
-		end
-		
-		local TLPos, Visible1	= WorldToViewport((CF * CFrame.new( Size.X,  Size.Y, 0)).Position);
-		local TRPos, Visible2	= WorldToViewport((CF * CFrame.new(-Size.X,  Size.Y, 0)).Position);
-		local BLPos, Visible3	= WorldToViewport((CF * CFrame.new( Size.X, -Size.Y, 0)).Position);
-		local BRPos, Visible4	= WorldToViewport((CF * CFrame.new(-Size.X, -Size.Y, 0)).Position);
-
-		local Quad = Box['Quad'];
-
-		if QUAD_SUPPORTED_EXPLOIT then
-			if Visible1 and Visible2 and Visible3 and Visible4 then
-				Quad.Visible = true;
-				Quad.Color	= Color;
-				Quad.PointA = V2New(TLPos.X, TLPos.Y);
-				Quad.PointB = V2New(TRPos.X, TRPos.Y);
-				Quad.PointC = V2New(BRPos.X, BRPos.Y);
-				Quad.PointD = V2New(BLPos.X, BLPos.Y);
-			else
-				Box['Quad'].Visible = false;
-			end
-		else
-			Visible1 = TLPos.Z > 0 -- (commented | reason: random flashes);
-			Visible2 = TRPos.Z > 0 -- (commented | reason: random flashes);
-			Visible3 = BLPos.Z > 0 -- (commented | reason: random flashes);
-			Visible4 = BRPos.Z > 0 -- (commented | reason: random flashes);
-
-			-- ## BEGIN UGLY CODE
-			if Visible1 then
-				Box['TopLeft'].Visible		= true;
-				Box['TopLeft'].Color		= Color;
-				Box['TopLeft'].From			= V2New(TLPos.X, TLPos.Y);
-				Box['TopLeft'].To			= V2New(TRPos.X, TRPos.Y);
-			else
-				Box['TopLeft'].Visible		= false;
-			end
-			if Visible2 then
-				Box['TopRight'].Visible		= true;
-				Box['TopRight'].Color		= Color;
-				Box['TopRight'].From		= V2New(TRPos.X, TRPos.Y);
-				Box['TopRight'].To			= V2New(BRPos.X, BRPos.Y);
-			else
-				Box['TopRight'].Visible		= false;
-			end
-			if Visible3 then
-				Box['BottomLeft'].Visible	= true;
-				Box['BottomLeft'].Color		= Color;
-				Box['BottomLeft'].From		= V2New(BLPos.X, BLPos.Y);
-				Box['BottomLeft'].To		= V2New(TLPos.X, TLPos.Y);
-			else
-				Box['BottomLeft'].Visible	= false;
-			end
-			if Visible4 then
-				Box['BottomRight'].Visible	= true;
-				Box['BottomRight'].Color	= Color;
-				Box['BottomRight'].From		= V2New(BRPos.X, BRPos.Y);
-				Box['BottomRight'].To		= V2New(BLPos.X, BLPos.Y);
-			else
-				Box['BottomRight'].Visible	= false;
-			end
-			-- ## END UGLY CODE
-			if Properties and typeof(Properties) == 'table' then
-				GetTableData(Properties)(function(i, v)
-					pcall(Set, Box['TopLeft'],		i, v);
-					pcall(Set, Box['TopRight'],		i, v);
-					pcall(Set, Box['BottomLeft'],	i, v);
-					pcall(Set, Box['BottomRight'],	i, v);
-				end)
-			end
-		end
-	end
-	function Box:SetVisible(bool)
-		if shared.am_ic3 then
-			Box['Square'].Visible = bool;
-			Box['OutlineSquare'].Visible = bool;
-		else
-			pcall(Set, Box['Quad'],				'Visible', bool);
-		end
-		-- pcall(Set, Box['TopLeft'],		'Visible', bool);
-		-- pcall(Set, Box['TopRight'],		'Visible', bool);
-		-- pcall(Set, Box['BottomLeft'],	'Visible', bool);
-		-- pcall(Set, Box['BottomRight'],	'Visible', bool);
-	end
-	function Box:Remove()
-		self:SetVisible(false);
-		if shared.am_ic3 then
-			Box['Square']:Remove();
-			Box['OutlineSquare']:Remove();
-		else
-			Box['Quad']:Remove();
-		end
-		-- Box['TopLeft']:Remove();
-		-- Box['TopRight']:Remove();
-		-- Box['BottomLeft']:Remove();
-		-- Box['BottomRight']:Remove();
-	end
-
-	return Box;
-end
 
 local Colors = {
 	White = FromHex'ffffff';
@@ -2247,7 +1676,6 @@ local function UpdatePlayerData()
 		for i, v in pairs(Players:GetPlayers()) do
 			local Data = shared.InstanceData[v.Name] or { Instances = {}; };
 
-			Data.Instances['Box'] = Data.Instances['Box'] or LineBox:Create{Thickness = 4};
 			Data.Instances['OutlineTracer'] = Data.Instances['OutlineTracer'] or NewDrawing'Line'{
 				Transparency	= 1;
 				Thickness		= 3;
@@ -2256,10 +1684,6 @@ local function UpdatePlayerData()
 			Data.Instances['Tracer'] = Data.Instances['Tracer'] or NewDrawing'Line'{
 				Transparency	= 1;
 				Thickness		= 1;
-			}
-			Data.Instances['HeadDot'] = Data.Instances['HeadDot'] or NewDrawing'Circle'{
-				Filled			= true;
-				NumSides		= 30;
 			}
 			Data.Instances['NameTag'] = Data.Instances['NameTag'] or NewDrawing'Text'{
 				Size			= Options.TextSize.Value;
@@ -2280,8 +1704,6 @@ local function UpdatePlayerData()
 			local DistanceTag	= Data.Instances['DistanceHealthTag'];
 			local Tracer		= Data.Instances['Tracer'];
 			local OutlineTracer	= Data.Instances['OutlineTracer'];
-			local HeadDot		= Data.Instances['HeadDot'];
-			local Box			= Data.Instances['Box'];
 
 			local Character = GetCharacter(v);
 			local Pass, Distance = CheckPlayer(v, Character);
@@ -2380,54 +1802,25 @@ local function UpdatePlayerData()
 						else
 							DistanceTag.Visible = false;
 						end
-						if Options.ShowDot.Value and Vis then
-							local Top			= WorldToViewport((Head.CFrame * CFrame.new(0, Scale, 0)).Position);
-							local Bottom		= WorldToViewport((Head.CFrame * CFrame.new(0, -Scale, 0)).Position);
-							local Radius		= (Top - Bottom).y;
-
-							HeadDot.Visible		= true;
-							HeadDot.Color		= Color;
-							HeadDot.Position	= V2New(ScreenPosition.X, ScreenPosition.Y);
-							HeadDot.Radius		= Radius;
-						else
-							HeadDot.Visible = false;
-						end
-						if Options.ShowBoxes.Value and Vis and HumanoidRootPart then
-							local Body = {
-								Head;
-								Character:FindFirstChild'Left Leg' or Character:FindFirstChild'LeftLowerLeg';
-								Character:FindFirstChild'Right Leg' or Character:FindFirstChild'RightLowerLeg';
-								Character:FindFirstChild'Left Arm' or Character:FindFirstChild'LeftLowerArm';
-								Character:FindFirstChild'Right Arm' or Character:FindFirstChild'RightLowerArm';
-							}
-							Box:Update(HumanoidRootPart.CFrame, V3New(2, 3, 1) * (Scale * 2), Color, nil, shared.am_ic3 and Body);
-						else
-							Box:SetVisible(false);
-						end
+						
 					else
 						NameTag.Visible			= false;
 						DistanceTag.Visible		= false;
-						HeadDot.Visible			= false;
 						
-						Box:SetVisible(false);
 					end
 				else
 					NameTag.Visible			= false;
 					DistanceTag.Visible		= false;
-					HeadDot.Visible			= false;
 					Tracer.Visible			= false;
 					OutlineTracer.Visible 	= false;
 					
-					Box:SetVisible(false);
 				end
 			else
 				NameTag.Visible			= false;
 				DistanceTag.Visible		= false;
-				HeadDot.Visible			= false;
 				Tracer.Visible			= false;
 				OutlineTracer.Visible 	= false;
 
-				Box:SetVisible(false);
 			end
 
 			shared.InstanceData[v.Name] = Data;
