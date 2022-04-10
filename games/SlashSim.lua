@@ -86,7 +86,6 @@ Pet:Toggle("Auto Pet (Must near by the egg)", "", false, function(v)
                 if v:IsA("Model") then
                     for i2, V in pairs(v:GetChildren()) do
                         if V:IsA("MeshPart") and selectedPet == v.Name then
-                            print(V.Parent)
                             teleport(V)
                        end 
                     end
