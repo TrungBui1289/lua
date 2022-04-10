@@ -25,7 +25,7 @@ local Farm     = w:Tab("Farm", 6034287535)
 Farm:Toggle("Auto Slash", "", false, function(v)
     _G.Settings.slash = v
     task.spawn(function()
-        while task.wait() do
+        while task.wait(0.01) do
             if not _G.Settings.slash then break end
             Player.PlayerScripts.EssentialForGameplay.AirSlice.Slice:Fire("Start")
             ReplicatedStorage.Remotes.Game.AirSlice:FireServer(true)
