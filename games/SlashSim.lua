@@ -38,7 +38,7 @@ Farm:Toggle("Auto Rebirth", "", false, function(v)
         while task.wait() do
             if not _G.Settings.rebirth then break end
             print(rebamount)
-            ReplicatedStorage.Remotes.Other.Rebirth:FireServer(3500, 12)
+            ReplicatedStorage.Remotes.Other.Rebirth:FireServer(30000, 12)
         end
     end)
 end)
