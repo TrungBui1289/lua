@@ -25,7 +25,7 @@ local Farm     = w:Tab("Farm", 6034287535)
 Farm:Toggle("Auto Slash", "", false, function(v)
     _G.Settings.slash = v
     task.spawn(function()
-        while task.wait(0.05) do
+    while task.wait(0.05) do
             if not _G.Settings.slash then break end
             Player.PlayerScripts.EssentialForGameplay.AirSlice.Slice:Fire("Start")
             ReplicatedStorage.Remotes.Game.AirSlice:FireServer(true)
@@ -70,6 +70,7 @@ end
 
 Pet:Dropdown("Select Pet", pet, function(v)
     selectedPet = v
+    
 end)
 
 Pet:Dropdown("Select Type Open", petType, function(v)
@@ -78,19 +79,20 @@ end)
 
 Pet:Toggle("Auto Pet (Must near by the egg)", "", false, function(v)
     _G.Settings.pet = v
-    
+    for i, v in pairs(game:GetService("Workspace").EggStands:GetChildren()) do
+        if v:IsA("Model") then
+            for i2, V in pairs(v:GetChildren()) do
+                if V:IsA("MeshPart") and selectedPet == v.Name then
+                    print(V.Parent)
+                    teleport(V)
+               end 
+            end
+        end
+    end
     task.spawn(function()
         while task.wait() do
             if not _G.Settings.pet then break end
-            for i, v in pairs(game:GetService("Workspace").EggStands:GetChildren()) do
-                if v:IsA("Model") then
-                    for i2, V in pairs(v:GetChildren()) do
-                        if V:IsA("MeshPart") and selectedPet == v.Name then
-                            teleport(V)
-                       end 
-                    end
-                end
-            end
+            
             ReplicatedStorage.Remotes.Pets.Eggs.HatchEgg:FireServer(selectedPet, selectedType)
         end
     end)
@@ -150,7 +152,7 @@ Mics:Toggle("Walk Speed", "", false, function(v)
 end)
 
 local walkspeed = 18
-Mics:Slider("WalkSpeed Amount", "", 18, 1000, 0, function(v)
+Mics:Slider("WalkSpeed Amount", "", 0, 1000, 18, function(v)
     walkSpeed = v
 end)
 
