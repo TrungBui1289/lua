@@ -12,6 +12,7 @@ local link = {
     [6531005851] = games.."LiftingTitans.lua",
     [6897226634] = games.."Timber.lua",
     [7728848215] = games.."SlashSim.lua",
+    [7363174769] = games.."DeliverymanSim.lua",
     [8737602449] = games.."PlsDonate.lua"
 }
 
