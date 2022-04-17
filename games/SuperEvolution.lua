@@ -5,6 +5,7 @@ game:GetService("Players").LocalPlayer.Idled:Connect(function()
 end)
 
 _G.Settings = {
+    autoclick = false;
     walkSpeed = false;
 }
 
@@ -20,13 +21,15 @@ local humanoid = game.Players.LocalPlayer.Character.Humanoid
 local Farm = w:Tab("Farm", 6034287535)
 
 local Enabled = false
-Farm:Bind("AutoClick", Enum.KeyCode.F, function()
-	Enabled = not Enabled
-	while Enabled do
+Farm:Bind("AutoClick", Enum.KeyCode.F, function(v)
+	 _G.Settings.autoclick = not  _G.Settings.autoclick
+	 task.spawn(function()
+        while task.wait(0.15) do
+            if not _G.Settings.autoclick then break end
 		VirtualInputManager:SendMouseButtonEvent(722, 438, 0, true, game, 1)
 		VirtualInputManager:SendMouseButtonEvent(722, 438, 0, false, game, 1)
-		wait(0.15)
-	end
+        end
+    end)
 end)
 
 local Energy = w:Tab("Energy", 8916381379)
