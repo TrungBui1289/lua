@@ -20,15 +20,13 @@ local humanoid = game.Players.LocalPlayer.Character.Humanoid
 
 local Farm = w:Tab("Farm", 6034287535)
 
-local Enabled = false
 Farm:Bind("AutoClick", Enum.KeyCode.F, function(v)
 	 _G.Settings.autoclick = not  _G.Settings.autoclick
 	 task.spawn(function()
         while task.wait(0.15) do
             if not _G.Settings.autoclick then break end
-            X, Y = Mouse.X, Mouse.Y
-		VirtualInputManager:SendMouseButtonEvent(958, 533, 0, true, game, 1)
-		VirtualInputManager:SendMouseButtonEvent(958, 533, 0, false, game, 1)
+		VirtualInputManager:SendMouseButtonEvent(722, 422, 0, true, game, 1)
+		VirtualInputManager:SendMouseButtonEvent(722, 422, 0, false, game, 1)
         end
     end)
 end)
