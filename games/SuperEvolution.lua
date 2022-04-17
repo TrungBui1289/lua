@@ -11,6 +11,8 @@ _G.Settings = {
 
 local Player            = game:GetService("Players").LocalPlayer
 local VirtualInputManager = game:GetService("VirtualInputManager")
+local Mouse = Player:GetMouse()
+local X, Y = 0, 0
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/hunterlib.lua"))()
 local w       = library:Window("TrungB Scripts", "WalkSpeed [RShift]", Color3.fromRGB(182, 0, 182), Enum.KeyCode.RightShift)
@@ -26,8 +28,9 @@ Farm:Bind("AutoClick", Enum.KeyCode.F, function(v)
 	 task.spawn(function()
         while task.wait(0.15) do
             if not _G.Settings.autoclick then break end
-		VirtualInputManager:SendMouseButtonEvent(722, 438, 0, true, game, 1)
-		VirtualInputManager:SendMouseButtonEvent(722, 438, 0, false, game, 1)
+            X, Y = Mouse.X, Mouse.Y + 10
+		VirtualInputManager:SendMouseButtonEvent(X, Y, 0, true, game, 1)
+		VirtualInputManager:SendMouseButtonEvent(X, Y, 0, false, game, 1)
         end
     end)
 end)
