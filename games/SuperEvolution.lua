@@ -29,8 +29,8 @@ Farm:Bind("AutoClick", Enum.KeyCode.F, function(v)
         while task.wait(0.15) do
             if not _G.Settings.autoclick then break end
             X, Y = Mouse.X, Mouse.Y
-		VirtualInputManager:SendMouseButtonEvent(X, Y, 0, true, game, 1)
-		VirtualInputManager:SendMouseButtonEvent(X, Y, 0, false, game, 1)
+		VirtualInputManager:SendMouseButtonEvent(X, Y + 1, 0, true, game, 1)
+		VirtualInputManager:SendMouseButtonEvent(X, Y - 1, 0, false, game, 1)
         end
     end)
 end)
