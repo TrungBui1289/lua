@@ -27,15 +27,27 @@ Farm:Bind("AutoClick", Enum.KeyCode.F, function(v)
 	 task.spawn(function()
         while task.wait(0.15) do
             if  _G.Settings.autoclick then
-            	X, Y = Mouse.X, Mouse.Y + 10
- 	else
-            	X, Y = 0, 0
-            end
+            	X, Y = Mouse.X, Mouse.Y + 5
             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, true, game, 1)
             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, false, game, 1)
+ 		else
+            	X, Y = 0, 0
+            end
         end
     end)
 end)
+
+local Orbs = w:Tab("Orbs Flag", 8916381379)
+
+for _, v in pairs(game:GetService("Workspace").OrbPoints:GetChildren()) do
+	Orbs:Button(v.Name, "", function()
+		for _, V in pairs(v:GetChildren()) do
+			if V:IsA("MeshPart") and V.Name == "Touch" then
+				Player.Character.HumanoidRootPart.CFrame = V.CFrame
+			end
+		end
+	end)
+end
 
 local Energy = w:Tab("Energy", 8916381379)
 
