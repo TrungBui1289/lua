@@ -7,6 +7,7 @@ end)
 _G.Settings = {
     autoTap   = false;
     autoUpgrade  = false;
+    autoRebirth  = false;
     autoKill  = false;
     autoTpPlr  = false;
     walkSpeed = false;
@@ -55,6 +56,16 @@ Farm:Toggle("Auto Click", "", false, function(v)
     end)
 end)
 
+Farm:Toggle("Auto Rebirth", "", false, function(v)
+    _G.Settings.autoRebirth = v
+
+    task.spawn(function()
+        while task.wait() do
+            if not _G.Settings.autoRebirth then break end
+		ReplicatedStorage.Rebirth:FireServer()
+        end
+    end)
+end)
 
 Farm:Toggle("Auto Upgrade", "", false, function(v)
     _G.Settings.autoUpgrade = v
@@ -126,16 +137,6 @@ Tele:Toggle("Tele to player", "", false, function(v)
 end)
 
 Tele:Line()
-
-for i, v in pairs(game:GetService("Workspace")["__MAP"]["__MACHINES"]:GetDescendants()) do
-	if v:IsA("Part") and v.Name == "Trigger" then
-		Tele:Button("Machine", "", function()
-			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-			wait(0.1)
-			Player.Character.HumanoidRootPart.CFrame = v.CFrame
-		end)
-	end
-end
 
 for i,  v in pairs(game:GetService("Workspace")["__MAP"]["__KING"]:GetChildren()) do
     if v.Name == "Crown" then
