@@ -6,7 +6,7 @@ end)
 
 _G.Settings = {
     autoTap   = false;
-    autoUpgrade  = false;
+    autoEgg   = false;
     autoRebirth  = false;
     autoKill  = false;
     autoTpPlr  = false;
@@ -19,21 +19,7 @@ local Player            = game:GetService("Players").LocalPlayer
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/hunterlib.lua"))()
 local w       = library:Window("TrungB Scripts", "Swordman Simulator [RShift]", Color3.fromRGB(182, 0, 182), Enum.KeyCode.RightShift)
 
-
 local humanoid = game.Players.LocalPlayer.Character.Humanoid
-
-local Home = w:Tab("Information", 6026568198)
-
-Home:Button("Games Active (Click me)", "", function()
-    library:Notification("  [+] Base Battles       - [+] Eating Simulator\n  [+] Anime Lifting    - [+] Anime Punching\n   [+] Swordman Sim  - [+] Strongest Punch \n [+] Rebirth ChampionX - [+] Lifting Titans\n         [+] Undead Defense Tycoon", "Thanks")
-end)
-
-Home:Line()
-
-Home:Button("Discord (Click)","", function()
-    setclipboard("TrungB#1230")
-    library:Notification("TrungB#1230", "Copied")
-end)
 
 local Farm = w:Tab("Farming", 6034287535)
 
@@ -45,11 +31,11 @@ Farm:Toggle("Auto Click", "", false, function(v)
             if not _G.Settings.autoTap then break end
             for I,V in pairs(workspace[game.Players.LocalPlayer.Name]:GetChildren()) do
                if V:IsA("Tool") and string.find(tostring(V), "Sword") then
-					for i, v in pairs(game:GetService("ReplicatedStorage").Assets.Swords:GetChildren()) do
-						if V.Name == v.Name then
-							ReplicatedStorage.SwordHit:FireServer(V.Name)
-						end
-					end
+			for i, v in pairs(game:GetService("ReplicatedStorage").Assets.Swords:GetChildren()) do
+				if V.Name == v.Name then
+					ReplicatedStorage.SwordHit:FireServer(V.Name)
+				end
+			end
                end
             end
         end
@@ -67,16 +53,20 @@ Farm:Toggle("Auto Rebirth", "", false, function(v)
     end)
 end)
 
-Farm:Toggle("Auto Upgrade", "", false, function(v)
-    _G.Settings.autoUpgrade = v
-
+Farm:Toggle("Auto Egg", "", false, function(v)
+    _G.Settings.autoEgg = v
     task.spawn(function()
         while task.wait() do
-            if not _G.Settings.autoUpgrade then break end
-			ReplicatedStorage.Upgrade:InvokeServer("StrengthMultiplier")
-			ReplicatedStorage.Upgrade:InvokeServer("WalkSpeed")
-			ReplicatedStorage.Upgrade:InvokeServer("JumpPower")
-			wait(0.5)
+            if not _G.Settings.autoEgg then break end
+            for i, v in pairs(ReplicatedStorage.Framework2.Modules.Shared.Internal.Modules:GetChildren()) do
+            		if v.Name == "2 | Network" then
+            			for i2, v2 in pairs(v.Remotes:GetChildren()) do
+            				if v2.Name == "openegg" then
+            					v2:InvokeServer({"Toxic Egg"})
+            				end
+            			end
+            		end
+            end
         end
     end)
 end)
@@ -84,9 +74,9 @@ end)
 Farm:Button("Click tp chest", "", function()
 	for i, v in pairs(game:GetService("Workspace")["__MAP"]["__CHESTS"]:GetDescendants()) do
 		if v:IsA("Part") and v.Name == "Part" then
-           humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-           wait(0.1)
-           Player.Character.HumanoidRootPart.CFrame = v.CFrame
+	           humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+	           wait(0.1)
+	           Player.Character.HumanoidRootPart.CFrame = v.CFrame
 		   wait(2)
 		end
 	end
