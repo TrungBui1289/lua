@@ -15,7 +15,8 @@ local link = {
     [7363174769] = games.."DeliverymanSim.lua",
     [6312753269] = games.."SuperEvolution.lua",
     [8884334497] = games.."MiningCLieckerSim.lua",
-    [8737602449] = games.."PlsDonate.lua"
+    [8737602449] = games.."PlsDonate.lua",
+    [8304191830] = games.."AnimeAdventures.lua"
 }
 
 for i, v in pairs(link) do
