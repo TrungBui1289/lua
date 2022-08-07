@@ -71,7 +71,7 @@ local function webhook()
 							["inline"] = true
 						}, {
                             ["name"] = "Recieved XP:",
-                            ["value"] = XP .. " <:research:631262681445433374>",
+                            ["value"] = XP .. " 🧪",
                             ["inline"] = true
                         }, {
                             ["name"] = "Total Time:",
