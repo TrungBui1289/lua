@@ -166,7 +166,7 @@ function sex()
     --------------------------------------------------
     -- Uilib Shits
 
-    local DiscordLib = loadstring(game:HttpGet "https://raw.githubusercontent.com/Forever4D/Lib/main/DiscordLib2.lua")()
+    local DiscordLib = loadstring(game:HttpGet "https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/DiscordLib.lua")()
     local win = DiscordLib:Window("[👻UPD 2] Anime Adventures v1.4.3".." - "..tostring(identifyexecutor()))
     local serv = win:Server("Anime Adventures", "http://www.roblox.com/asset/?id=6031075938")
             
