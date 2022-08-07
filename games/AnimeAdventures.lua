@@ -580,17 +580,16 @@ function sex()
         end)
 
         -- set unit position end--
-        autofarmtab:Label("--- Saved Config (Doesn't Refresh) ---")
+        autofarmtab:Label("--- Saved Config ---")
         autofarmtab:Label("Auto Sell at Wave: " .. tostring(getgenv().sellatwave))
         autofarmtab:Label("Webhook: " .. tostring(getgenv().weburl))
         autofarmtab:Label("Auto Farm: " .. tostring(getgenv().AutoFarm))
         autofarmtab:Label("Auto Start: " .. tostring(getgenv().autostart))
         autofarmtab:Label("Auto Sell: " .. tostring(getgenv().autosell))
         autofarmtab:Label("Auto Upgrade: " .. tostring(getgenv().autoupgrade))
-        autofarmtab:Label("Difficulty: (" .. tostring(getgenv().difficulty))
-        autofarmtab:Label("Selected World: [" .. tostring(getgenv().world))
-        autofarmtab:Label("Selected Level: [" .. tostring(getgenv().level))
-        autofarmtab:Label(" ")
+        autofarmtab:Label("Difficulty: " .. tostring(getgenv().difficulty))
+        autofarmtab:Label("Selected World: " .. tostring(getgenv().world))
+        autofarmtab:Label("Selected Level: " .. tostring(getgenv().level))
         autofarmtab:Label(" ")
 
     end
