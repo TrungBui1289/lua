@@ -54,7 +54,6 @@ local function webhook()
 					},
 					["description"] = "🎮 **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
 					["color"] = 0x7D46A2,
-          ["timestamp"] = datetime.datetime.utcnow(),
           
 					["thumbnail"] = {
 						['url'] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
