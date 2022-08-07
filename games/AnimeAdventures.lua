@@ -168,7 +168,7 @@ function sex()
 
     local DiscordLib = loadstring(game:HttpGet "https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/DiscordLib.lua")()
     local win = DiscordLib:Window("[👻UPD 2] Anime Adventures v1.4.3".." - "..tostring(identifyexecutor()))
-    local serv = win:Server("Anime Adventures", "http://www.roblox.com/asset/?id=6031075938")
+    local serv = win:Server("Remake by TrungB", "http://www.roblox.com/asset/?id=6031075938")
             
     if game.PlaceId == 8304191830 then
         local unitselecttab = serv:Channel("Select Units")
