@@ -53,7 +53,7 @@ local function webhook()
 						["icon_url"] = "https://cdn.discordapp.com/emojis/997123585476927558.webp?size=96&quality=lossless"
 					},
 					["description"] = "🎮 **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
-					["color"] = 7D46A2,
+					["color"] = 8210082,
           
 					["thumbnail"] = {
 						['url'] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
