@@ -90,7 +90,7 @@ local function webhook()
             
             ["footer"] = {
               {
-                ["text"] = "Requested by ".. game.Players.LocalPlayer.userId ..,
+                ["text"] = "Requested by ".. game.Players.LocalPlayer.userId ..".",
                 ["icon_url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
               }
             }
