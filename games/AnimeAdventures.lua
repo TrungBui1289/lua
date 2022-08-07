@@ -35,7 +35,7 @@ local function webhook()
 			return
 		end 
 			
-    		XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
+        XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
 		gems = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.GemReward.Main.Amount.Text)
 		cwaves = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.WavesCompleted.Text
 		ctime = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.Timer.Text
@@ -49,10 +49,10 @@ local function webhook()
 			["embeds"] = {
 				{
 					["author"] = {
-						["name"] = "Result ✔",
+						["name"] = "Anime Adventure | Result",
 						["icon_url"] = "https://cdn.discordapp.com/emojis/997123585476927558.webp?size=96&quality=lossless"
 					},
-					["description"] = "🕵️ **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
+					["description"] = "<a:load2:871793458220773466> **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
 					["color"] = 8210082,
           
 					["thumbnail"] = {
@@ -71,11 +71,11 @@ local function webhook()
 							["inline"] = true
 						}, {
                             ["name"] = "Recieved XP:",
-                            ["value"] = XP .. " 🧪",
+                            ["value"] = XP .. " <:research:631262681445433374>",
                             ["inline"] = true
                         }, {
                             ["name"] = "Total Time:",
-                            ["value"] = tostring(ttime[2]) .. " ⏳",
+                            ["value"] = tostring(ttime[2]) .. " <a:checkblancoo:892219442455515166>",
                             ["inline"] = true
                         }, {
                             ["name"] = "Current Gems:",
@@ -83,17 +83,10 @@ local function webhook()
                             ["inline"] = true
                         }, {
                             ["name"] = "Current Level:",
-                            ["value"] = tostring(game.Players.LocalPlayer.PlayerGui.spawn_units.Lives.Main.Desc.Level.Text).. " ✨",
+                            ["value"] = tostring(game.Players.LocalPlayer.PlayerGui.spawn_units.Lives.Main.Desc.Level.Text).. " <a:tried:871793460779315250>",
                             ["inline"] = true
                         }
-					},
-                        
-                    ["footer"] = {
-                      {
-                        ["text"] = "Requested by ".. game.Players.LocalPlayer.userId ..".",
-                        ["icon_url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
-                      }
-                    }
+					}
 				}
 			}
 		}
