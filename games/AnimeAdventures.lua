@@ -44,15 +44,15 @@ local function webhook()
 
 		local data = {
 			["content"] = "",
-			["username"] = "Result ✔",
+			["username"] = "Anime Adventures",
 			["avatar_url"] = "https://tr.rbxcdn.com/e5b5844fb26df605986b94d87384f5fb/150/150/Image/Jpeg",
 			["embeds"] = {
 				{
 					["author"] = {
-						["name"] = "Anime Adventures",
+						["name"] = "Result ✔",
 						["icon_url"] = "https://cdn.discordapp.com/emojis/997123585476927558.webp?size=96&quality=lossless"
 					},
-					["description"] = "🎮 **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
+					["description"] = "🕵️ **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
 					["color"] = 8210082,
           
 					["thumbnail"] = {
@@ -70,30 +70,30 @@ local function webhook()
 							["value"] = gems .. " <:gem:997123585476927558>",
 							["inline"] = true
 						}, {
-                ["name"] = "Recieved XP:",
-                ["value"] = XP .. " 🧪",
-                ["inline"] = true
-            }, {
-                ["name"] = "Total Time:",
-                ["value"] = tostring(ttime[2]) .. " ⏳",
-                ["inline"] = true
-            }, {
-                ["name"] = "Current Gems:",
-                ["value"] = tostring(game.Players.LocalPlayer._stats.gem_amount.Value).." <:gem:997123585476927558>",
-                ["inline"] = true
-            }, {
-                ["name"] = "Current Level:",
-                ["value"] = tostring(game.Players.LocalPlayer.PlayerGui.spawn_units.Lives.Main.Desc.Level.Text).. " ✨",
-                ["inline"] = true
-            },
-            
-            ["footer"] = {
-              {
-                ["text"] = "Requested by ".. game.Players.LocalPlayer.userId ..".",
-                ["icon_url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
-              }
-            }
-					}
+                            ["name"] = "Recieved XP:",
+                            ["value"] = XP .. " 🧪",
+                            ["inline"] = true
+                        }, {
+                            ["name"] = "Total Time:",
+                            ["value"] = tostring(ttime[2]) .. " ⏳",
+                            ["inline"] = true
+                        }, {
+                            ["name"] = "Current Gems:",
+                            ["value"] = tostring(game.Players.LocalPlayer._stats.gem_amount.Value).." <:gem:997123585476927558>",
+                            ["inline"] = true
+                        }, {
+                            ["name"] = "Current Level:",
+                            ["value"] = tostring(game.Players.LocalPlayer.PlayerGui.spawn_units.Lives.Main.Desc.Level.Text).. " ✨",
+                            ["inline"] = true
+                        }
+					},
+                        
+                    ["footer"] = {
+                      {
+                        ["text"] = "Requested by ".. game.Players.LocalPlayer.userId ..".",
+                        ["icon_url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.userId .. "&width=420&height=420&format=png"
+                      }
+                    }
 				}
 			}
 		}
