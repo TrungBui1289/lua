@@ -79,12 +79,12 @@ local function webhook()
 							["name"] = "Area Difficulty:",
 							["value"] = "`" .. difficulty ..
 								"` 🤣",
-							["inline"] = false
+							["inline"] = true
 						},{
 							["name"] = "Total Waves:",
 							["value"] = tostring(waves[2]) ..
 								" <:wave:997136622363627530>",
-							["inline"] = true
+							["inline"] = false
 						}, {
 							["name"] = "Recieved Gems:",
 							["value"] = gems .. " <:gem:997123585476927558>",
