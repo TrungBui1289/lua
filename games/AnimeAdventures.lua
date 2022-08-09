@@ -74,12 +74,12 @@ local function webhook()
 							["name"] = "Area Description:",
 							["value"] = "`" .. areaDescription ..
 								"`",
-							["inline"] = false
+							["inline"] = true
 						},{
 							["name"] = "Area Difficulty:",
 							["value"] = "`" .. difficulty ..
 								"`",
-							["inline"] = true
+							["inline"] = false
 						},{
 							["name"] = "Total Waves:",
 							["value"] = tostring(waves[2]) ..
