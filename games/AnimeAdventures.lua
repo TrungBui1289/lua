@@ -34,9 +34,13 @@ local function webhook()
 		if url == "" then
 			return
 		end 
+		
 		title = game:GetService("Players").trungb2.PlayerGui.ResultsUI.Holder.Title.text
-		lvlName = game:GetService("Players").trungb2.PlayerGui.ResultsUI.Holder.LevelName.text
-        XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
+		areaName = game:GetService("Players").trungb2.PlayerGui.NewArea.holder.areaTitle.text
+		areaDescription = game:GetService("Players").trungb2.PlayerGui.NewArea.holder.areaDescription.text
+		difficulty = game:GetService("Players").trungb2.PlayerGui.NewArea.holder.Difficulty.text
+			
+		XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
 		gems = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.GemReward.Main.Amount.Text)
 		cwaves = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.WavesCompleted.Text
 		ctime = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.Timer.Text
@@ -62,8 +66,18 @@ local function webhook()
 
 					["fields"] = {
 						{
-							["name"] = "Level Name:",
-							["value"] = "`" .. lvlName ..
+							["name"] = "Area:",
+							["value"] = "`" .. areaName ..
+								"`",
+							["inline"] = false
+						},{
+							["name"] = "Area Description:",
+							["value"] = "`" .. areaDescription ..
+								"`",
+							["inline"] = true
+						},{
+							["name"] = "Area Difficulty:",
+							["value"] = "`" .. difficulty ..
 								"`",
 							["inline"] = false
 						},{
