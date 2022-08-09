@@ -35,6 +35,7 @@ local function webhook()
 			return
 		end 
 		title = game:GetService("Players").trungb2.PlayerGui.ResultsUI.Holder.Title.text
+		lvlName = game:GetService("Players").trungb2.PlayerGui.ResultsUI.Holder.LevelName.text
         XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
 		gems = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.GemReward.Main.Amount.Text)
 		cwaves = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.WavesCompleted.Text
@@ -61,6 +62,11 @@ local function webhook()
 
 					["fields"] = {
 						{
+							["name"] = "Level Name:",
+							["value"] = "`" .. lvlName ..
+								"`",
+							["inline"] = false
+						},{
 							["name"] = "Total Waves:",
 							["value"] = tostring(waves[2]) ..
 								" <:wave:997136622363627530>",
