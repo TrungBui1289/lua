@@ -78,7 +78,7 @@ local function webhook()
 						},{
 							["name"] = "Area Difficulty:",
 							["value"] = "`" .. difficulty ..
-								"`",
+								"` 🤣",
 							["inline"] = false
 						},{
 							["name"] = "Total Waves:",
