@@ -34,7 +34,7 @@ local function webhook()
 		if url == "" then
 			return
 		end 
-			
+		title = game:GetService("Players").trungb2.PlayerGui.ResultsUI.Holder.Title.text
         XP = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.XPReward.Main.Amount.Text)
 		gems = tostring(game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.GoldGemXP.GemReward.Main.Amount.Text)
 		cwaves = game:GetService("Players").LocalPlayer.PlayerGui.ResultsUI.Holder.Middle.WavesCompleted.Text
@@ -49,7 +49,7 @@ local function webhook()
 			["embeds"] = {
 				{
 					["author"] = {
-						["name"] = "Anime Adventure | Result 💯",
+						["name"] = "Result 💯 | ".. title .."",
 						["icon_url"] = "https://cdn.discordapp.com/emojis/997123585476927558.webp?size=96&quality=lossless"
 					},
 					["description"] = "<a:load2:871793458220773466> **User:** `"..game:GetService("Players").LocalPlayer.Name.."`",
