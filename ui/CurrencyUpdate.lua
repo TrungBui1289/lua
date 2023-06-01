@@ -13,7 +13,7 @@ local format = "%H:%M:%S | %a, %d %b %Y"
 local timei = os.date(format, unixtime)
 
 
-local updateDelay = 600  -- The delay between updates (in seconds)
+local updateDelay = 300  -- The delay between updates (in seconds)
 
 -- Load the library
 local Library = require(game.ReplicatedStorage.Library)
@@ -36,7 +36,7 @@ end
 -- Function to send an update to the webhook
 local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
     local embed = {
-        ["title"] = "Currency Update",
+        ["title"] = "Diamonds Update",
         ["color"] = tonumber("0x00FF00", 16), -- Green
         ["fields"] = {
             {
@@ -50,7 +50,7 @@ local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
                 ["inline"] = true
             },
             {
-                ["name"] = "Last 10 minutes",
+                ["name"] = "Last 5 minutes",
                 ["value"] = formatNumber(deltaAmount),
                 ["inline"] = true
             }
@@ -75,11 +75,11 @@ end
 -- Initialize the current and total amounts
 local currentAmount = getCurrentCurrencyAmount() or 0
 local totalAmount = 0 -- Initialize to 0 instead of currentAmount
-local last10MinAmount = 0
+local last5MinAmount = 0
 local totalTime = 0
 
 -- Send the initial update
-sendUpdate(currentAmount, totalAmount, last10MinAmount, totalTime)
+sendUpdate(currentAmount, totalAmount, last5MinAmount, totalTime)
 
 -- Start a loop to update the currency every 10 minutes
 while true do
@@ -87,7 +87,7 @@ while true do
     local newAmount = getCurrentCurrencyAmount() or 0
     local deltaAmount = newAmount - currentAmount
     totalAmount = totalAmount + deltaAmount
-    last10MinAmount = deltaAmount
+    last5MinAmount = deltaAmount
     currentAmount = newAmount
     totalTime = totalTime + (updateDelay / 60)
     sendUpdate(currentAmount, totalAmount, last10MinAmount, totalTime)
