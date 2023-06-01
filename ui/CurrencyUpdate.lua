@@ -40,17 +40,17 @@ local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
         ["color"] = tonumber("0x00FF00", 16), -- Green
         ["fields"] = {
             {
-                ["name"] = "Current "..currencyName,
+                ["name"] = "Hiện có",
                 ["value"] = formatNumber(currentAmount),
                 ["inline"] = false
             },
             {
-                ["name"] = "Total "..currencyName.." Earned",
-                ["value"] = formatNumber(totalAmount).." / "..formatNumber(totalTime).." minutes",
+                ["name"] = "Tổng nhận",
+                ["value"] = formatNumber(totalAmount).." / "..formatNumber(totalTime).." phút",
                 ["inline"] = true
             },
             {
-                ["name"] = "Last 5 minutes",
+                ["name"] = "5 phút trước",
                 ["value"] = formatNumber(deltaAmount),
                 ["inline"] = true
             }
@@ -65,7 +65,7 @@ local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
 			['Content-Type'] = 'application/json';
 		};
 		Body = game:GetService('HttpService'):JSONEncode({
-			username = "Gem Tracker", 
+			username = "GemTracker", 
 			avatar_url = 'https://i.imgur.com/5b6NmEo.png',
 			embeds = {embed} 
 		})
