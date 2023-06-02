@@ -1079,7 +1079,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	--end)
 end
 
-wait(5)
+wait(25)
 local EndingGems = Library.Save.Get().Diamonds
 GemsEarned = EndingGems - StartingGems
 WH()
@@ -1154,6 +1154,5 @@ function Teleport()
     end
 end
 
-wait(15)
 
 Teleport()
