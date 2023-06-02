@@ -85,7 +85,7 @@ function WH()
             ["embeds"] = {
 			    {
 			      ["title"] = "Stat Update",
-			      ["description"] = ":white_check_mark:Successfully!! Hopping To New Server!",
+			      ["description"] = "Successfully!! Hopping To New Server!",
 			      ["color"] = 15115337,
 			      ["fields"] = {
 			        {
