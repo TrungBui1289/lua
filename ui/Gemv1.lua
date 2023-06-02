@@ -86,7 +86,7 @@ function WH()
 			    {
 			      ["title"] = "Stat Update",
 			      ["description"] = "Successfully!! Hopping To New Server!",
-			      ["color"] = 5814783,
+			      ["color"] = 24854255,
 			      ["fields"] = {
 			        {
 			          ["name"] = "Stats",
