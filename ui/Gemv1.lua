@@ -5,6 +5,8 @@ breakgiantchest = true -- Weather To Break The Giant Mine Chest Even If Its Belo
 breakbigchests = true -- Weather To Break The Big Mine Chests Even If They Are Below The Multi
 WEBHOOK = "https://discord.com/api/webhooks/1113915902153457816/QaLu0QdtM1VGAf-rakKERZ9nCTFxDrd2yhW0d4Yzexf5d2VhISDbTxxjoUdxxOhWKnDs" -- Webhook
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/PSX.lua"))()
+
 local oldJob = game.JobId
 
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
@@ -136,7 +138,8 @@ for i, v in pairs(AllC) do
 		end
 	end
 end
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9043.19141, -14.3321552, 2424.63647, -0.938255966, 7.68024719e-08, 0.345941782, 8.24376656e-08, 1, 1.57588176e-09, -0.345941782, 2.99972136e-08, -0.938255966)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9155.5683608, 18.6334801, 2284.2688, 0.800801218, 5.75998271e-08, 0.59893024, -6.35986268e-08, 1, -1.11364722e-08, -0.59893024, -2.91730391e-08, 0.800801218)
+
 Fire("Performed Teleport")
 wait(0.5)
 PETS = Lib.Save.Get().PetsEquipped
