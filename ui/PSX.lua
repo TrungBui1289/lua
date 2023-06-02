@@ -1,6 +1,6 @@
 -- Important Variables
 local SCRIPT_NAME = "TrungB PSX GUI"
-local SCRIPT_VERSION = "v0.1" -- Hey rafa remember to change it before updating lmao
+local SCRIPT_VERSION = "v0.1"
 
 while not game:IsLoaded() do wait(1) end
 
