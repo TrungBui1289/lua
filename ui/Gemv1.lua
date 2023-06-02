@@ -92,9 +92,6 @@ function WH()
 			          ["name"] = "Stats",
 			          ["value"] = ":clock1: **Time:** ``"..TimeElapsed.."s``\n:gem: **Earned:** ``"..add_suffix(GemsEarned).."``\n:map: **Map:** ``"..AREATOCHECK.."``"
 			        }
-			      },
-			      ["author"] = {
-			        ["name"] = "Mystic Farmer - Stats"
 			      }
 			    }
 			  }
