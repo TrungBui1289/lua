@@ -84,8 +84,8 @@ function WH()
             ["content"] = "",
             ["embeds"] = {
 			    {
-			      ["title"] = "Server Hop Stat Update",
-			      ["description"] = "Successfully Broke Mystic Chest In Server. Hopping To New Server!",
+			      ["title"] = "Stat Update",
+			      ["description"] = "Successfully!! Hopping To New Server!",
 			      ["color"] = 5814783,
 			      ["fields"] = {
 			        {
