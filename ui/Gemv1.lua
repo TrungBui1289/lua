@@ -90,7 +90,7 @@ function WH()
 			      ["fields"] = {
 			        {
 			          ["name"] = "",
-			          ["value"] = ":clock1: **Time:** ``"..TimeElapsed.."s``\n:gem: **Earned:** ``"..add_suffix(GemsEarned)..""
+			          ["value"] = ":clock1: **Time:** ``"..TimeElapsed.."s``\n:gem: **Earned:** ``"..add_suffix(GemsEarned).."``"
 			        }
 			      }
 			    }
