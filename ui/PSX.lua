@@ -1080,7 +1080,7 @@ for i, v in pairs(AllNeededCoins) do
 	end
 end
 
-wait(25)
+wait(5)
 local EndingGems = Library.Save.Get().Diamonds
 GemsEarned = EndingGems - StartingGems
 WH()
@@ -1155,5 +1155,6 @@ function Teleport()
     end
 end
 
+wait(10)
 
 Teleport()
