@@ -4,6 +4,8 @@ local SCRIPT_VERSION = "v0.1" -- Hey rafa remember to change it before updating 
 
 while not game:IsLoaded() do wait(1) end
 
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9155.5683608, 18.6334801, 2284.2688, 0.800801218, 5.75998271e-08, 0.59893024, -6.35986268e-08, 1, -1.11364722e-08, -0.59893024, -2.91730391e-08, 0.800801218)
+
 -- Detect if the script has executed by AutoExec
 local AutoExecuted = false
 if not game:IsLoaded() then AutoExecuted = true end
