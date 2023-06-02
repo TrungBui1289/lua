@@ -85,12 +85,12 @@ function WH()
             ["embeds"] = {
 			    {
 			      ["title"] = "Stat Update",
-			      ["description"] = ":White_check_mark:Successfully!! Hopping To New Server!",
+			      ["description"] = ":white_check_mark:Successfully!! Hopping To New Server!",
 			      ["color"] = 15115337,
 			      ["fields"] = {
 			        {
 			          ["name"] = "",
-			          ["value"] = ":clock1: **Time:** ``"..TimeElapsed.."s``\n:gem: **Earned:** ``"..add_suffix(GemsEarned).."``\n:map: **Map:** ``"..AREATOCHECK.."``"
+			          ["value"] = ":clock1: **Time:** ``"..TimeElapsed.."s``\n:gem: **Earned:** ``"..add_suffix(GemsEarned).."``
 			        }
 			      }
 			    }
