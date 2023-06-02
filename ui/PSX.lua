@@ -1153,6 +1153,6 @@ function Teleport()
     end
 end
 
-wait(10)
+wait(15)
 
 Teleport()
