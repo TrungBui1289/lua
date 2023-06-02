@@ -829,7 +829,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 							for _, pet in pairs(equippedPets) do
 								local selectedCoin = foundCoins[1]
 								task.spawn(function()
-									Library.Network.Invoke("Join Coin", selectedCoin.coinId, {pet.uid}) 
+									--Library.Network.Invoke("Join Coin", selectedCoin.coinId, {pet.uid}) 
 									Library.Network.Fire("Farm Coin", selectedCoin.coinId, pet.uid)
 									
 								end)
