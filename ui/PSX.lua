@@ -167,8 +167,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	LocalPlayer.PlayerScripts:WaitForChild("Scripts", 10):WaitForChild("Game", 10):WaitForChild("Coins", 10)
 	LocalPlayer.PlayerScripts:WaitForChild("Scripts", 10):WaitForChild("Game", 10):WaitForChild("Pets", 10)
 	wait()
-	-- local orbsScript = getsenv(game.Players.LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Orbs", 10))
-	-- local CollectOrb = orbsScript.Collect
 	
 	local GetRemoteFunction = debug.getupvalue(Library.Network.Invoke, 2)
 		-- OrbList = debug.getupvalue(orbsScript.Collect, 1)
@@ -415,7 +413,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	
 	local autoFarmTab = Window:CreateTab("Farm", "13075651575", true)
-	local stats = autoFarmTab:CreateParagraph({Title = "Hello, <b><font color=\"#2B699F\">" .. LocalPlayer.DisplayName .. "</font></b>!", Content = ""})
 	local autoFarmSection = autoFarmTab:CreateSection("Auto Farm", false, false, "7785988164")
 	local enableAutoFarm = true
 	autoFarmTab:CreateToggle({
