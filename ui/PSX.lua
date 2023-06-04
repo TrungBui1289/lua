@@ -346,6 +346,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 
 	local Window = Rayfield:CreateWindow({
+	Name = "Pet Simulator GUI | by TrungB ",
 	   ConfigurationSaving = {
 		  Enabled = true,
 		  FolderName = "TrungB",
