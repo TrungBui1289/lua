@@ -346,9 +346,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 
 	local Window = Rayfield:CreateWindow({
-	   Name = "Pet Simulator GUI | by TrungB ",
-	   LoadingTitle = SCRIPT_NAME .. " " .. SCRIPT_VERSION,
-	   LoadingSubtitle = "by TrungB",
 	   ConfigurationSaving = {
 		  Enabled = true,
 		  FolderName = "TrungB",
@@ -456,7 +453,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	   Name = "Farm Max Distance",
 	   Flag = "AutoFarm_MaxDistance",
 	   SectionParent = autoFarmSection,
-	   Range = {10, tonumber(Library.Settings.CoinGrabDistance) or 300},
+	   Range = {10, tonumber(Library.Settings.CoinGrabDistance) or 600},
 	   Increment = 1,
 	   Suffix = "Studs",
 	   CurrentValue = 200,
