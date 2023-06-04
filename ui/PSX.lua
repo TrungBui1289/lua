@@ -2,7 +2,7 @@
 local SCRIPT_NAME = "TrungB PSX GUI"
 local SCRIPT_VERSION = "v0.1"
 
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9155.5683608, 18.6334801, 2284.2688, 0.800801218, 5.75998271e-08, 0.59893024, -6.35986268e-08, 1, -1.11364722e-08, -0.59893024, -2.91730391e-08, 0.800801218)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9147.89844, -14.7124605, 2344.86011, -0.7152351114, 4.50237785e-08, -0.698883891, 8.63818528e-09, 1, 5.55821131e-08, 0.698883891, 3.37171926e-08, -0.715235116)
 
 -- Detect if the script has executed by AutoExec
 local AutoExecuted = false
