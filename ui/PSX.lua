@@ -454,8 +454,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	   Name = "Farm Max Distance",
 	   Flag = "AutoFarm_MaxDistance",
 	   SectionParent = autoFarmSection,
-	   Range = {10, tonumber(Library.Settings.CoinGrabDistance) or 600},
-	   Increment = 1,
+	   Range = {100, tonumber(Library.Settings.CoinGrabDistance) or 600},
+	   Increment = 5,
 	   Suffix = "Studs",
 	   CurrentValue = 200,
 	   Callback = function(Value)
