@@ -13,7 +13,7 @@ local format = "%H:%M:%S | %a, %d %b %Y"
 local timei = os.date(format, unixtime)
 
 
-local updateDelay = 300  -- The delay between updates (in seconds)
+local updateDelay = 60  -- The delay between updates (in seconds)
 
 -- Load the library
 local Library = require(game.ReplicatedStorage.Library)
@@ -36,25 +36,15 @@ end
 -- Function to send an update to the webhook
 local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
     local embed = {
-        ["title"] = "Diamonds Update",
-        ["color"] = tonumber("0x00FF00", 16), -- Green
+        ["title"] = "Cập nhật Gems",
+        ["description"] = "Tổng số gems qua mỗi phút :penguin:",
+        ["color"] = tonumber("0xe69138", 16), -- Orange
         ["fields"] = {
             {
-                ["name"] = "Hiện có",
-                ["value"] = formatNumber(currentAmount),
-                ["inline"] = false
-            },
-            {
-                ["name"] = "Tổng nhận",
-                ["value"] = formatNumber(totalAmount).." / "..formatNumber(totalTime).." phút",
-                ["inline"] = true
-            },
-            {
-                ["name"] = "5 phút trước",
-                ["value"] = formatNumber(deltaAmount),
-                ["inline"] = true
+                ["name"] = "",
+                ["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
             }
-        },
+		},
         ["footer"] = {text = timei}
 		}
 		
@@ -65,7 +55,7 @@ local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
 			['Content-Type'] = 'application/json';
 		};
 		Body = game:GetService('HttpService'):JSONEncode({
-			username = "GemTracker", 
+			username = "Thông báo", 
 			avatar_url = 'https://i.imgur.com/5b6NmEo.png',
 			embeds = {embed} 
 		})
