@@ -452,15 +452,15 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	   end,
 	})
 	
-	local farmMaxDistance = 200
+	local farmMaxDistance = 300
 	autoFarmTab:CreateSlider({
 	   Name = "Farm Max Distance",
 	   Flag = "AutoFarm_MaxDistance",
 	   SectionParent = autoFarmSection,
-	   Range = {100, tonumber(Library.Settings.CoinGrabDistance) or 600},
-	   Increment = 5,
+	   Range = {10, tonumber(Library.Settings.CoinGrabDistance) or 300},
+	   Increment = 1,
 	   Suffix = "Studs",
-	   CurrentValue = 200,
+	   CurrentValue = 300,
 	   Callback = function(Value)
 			farmMaxDistance = Value
 	   end,
