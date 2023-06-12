@@ -30,13 +30,10 @@ local CurrentPosition = nil
 local Webhook_Enabled = false
 local Webhook_URL = ""
 
-local currencyName = "Diamonds"
-
 local plr = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
 local unixtime = os.time()
 local format = "%H:%M:%S | %a, %d %b %Y"
 local timei = os.date(format, unixtime)
-
 
 local updateDelay = 60  -- The delay between updates (in seconds)
 
