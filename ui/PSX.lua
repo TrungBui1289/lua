@@ -885,9 +885,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	local currencyName = "Diamonds"
 	
 	local plr = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
-	local unixtime = os.time()
-	local format = "%H:%M:%S | %a, %d %b %Y"
-	local timei = os.date(format, unixtime)
 
 	local updateDelay = 60  -- The delay between updates (in seconds)
 
@@ -922,7 +919,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 				["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
 			    }
 			},
-			["footer"] = {text = timei}
+			["footer"] = {
+				text = "----- Made by TrungB -----"
+			}
 		}
 
 		(syn and syn.request or http_request or http.request) {
