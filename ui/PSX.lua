@@ -906,7 +906,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	    return saveData[currencyName]
 	end
 	
-	function SendWebhookInfo(currentAmount, totalAmount)
+	function SendWebhookInfo(currentAmount, totalAmount, deltaAmount)
 		if not Webhook_Enabled or not Webhook_URL or Webhook_URL == "" then return end
 		
 		local embed = {
@@ -916,7 +916,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 			["fields"] = {
 			    {
 				["name"] = "",
-				["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
+				["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:clock: **1 phút trước:** ``"..formatNumber(deltaAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
 			    }
 			},
 			["footer"] = {
@@ -941,7 +941,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	-- Initialize the current and total amounts
 	local currentAmount = getCurrentCurrencyAmount() or 0
 	local totalAmount = 0 -- Initialize to 0 instead of currentAmount
-	local last5MinAmount = 0
+	local last1MinAmount = 0
 	
 	--//*----------- SETTINGS -----------//-
 	local settingsTab = Window:CreateTab("Settings", "13075268290", true)
@@ -960,9 +960,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 			    local newAmount = getCurrentCurrencyAmount() or 0
 			    local deltaAmount = newAmount - currentAmount
 			    totalAmount = totalAmount + deltaAmount
-			    last5MinAmount = deltaAmount
+			    last1MinAmount = deltaAmount
 			    currentAmount = newAmount
-			    SendWebhookInfo(currentAmount, totalAmount)
+			    SendWebhookInfo(currentAmount, totalAmount, deltaAmount)
 			end
 		end
 	})
