@@ -32,6 +32,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 end)
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/reducelag.lua"))()
+
 if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 7722306047 or game.PlaceId == 12610002282 then
 	
 	local banSuccess, banError = pcall(function() 
@@ -898,4 +900,3 @@ end
 --game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9147.89844, -14.7124605, 2344.86011, -0.7152351114, 4.50237785e-08, -0.698883891, 8.63818528e-09, 1, 5.55821131e-08, 0.698883891, 3.37171926e-08, -0.715235116)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8994.38184, -61.9601894, 2548.96167, 0.999595344, 1.17857162e-07, -0.0284447595, -1.16815023e-07, 1, 3.82990244e-08, 0.0284447595, -3.49607525e-08, 0.999595344)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/reducelag.lua"))()
