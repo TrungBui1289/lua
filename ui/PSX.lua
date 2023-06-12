@@ -954,24 +954,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		SectionParent = discordSettings,
 		Callback = function(value) 
 			Webhook_Enabled = value
-			-- Initialize the current and total amounts
-			local currentAmount = getCurrentCurrencyAmount() or 0
-			local totalAmount = 0 -- Initialize to 0 instead of currentAmount
-			local last5MinAmount = 0
-		
-			-- Send the initial update
-			SendWebhookInfo(currentAmount, totalAmount)
-		
-			-- Start a loop to update the currency every 10 minutes
-			while true do
-			    wait(updateDelay)
-			    local newAmount = getCurrentCurrencyAmount() or 0
-			    local deltaAmount = newAmount - currentAmount
-			    totalAmount = totalAmount + deltaAmount
-			    last5MinAmount = deltaAmount
-			    currentAmount = newAmount
-			    SendWebhookInfo(currentAmount, totalAmount)
-			end
 		end
 	})
 
@@ -983,7 +965,25 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	   OnEnter = false,
 	   RemoveTextAfterFocusLost = false,
 	   Callback = function(Text)
-			SaveCustomFlag("Webhook_URL", Text)
+		SaveCustomFlag("Webhook_URL", Text)
+		-- Initialize the current and total amounts
+		local currentAmount = getCurrentCurrencyAmount() or 0
+		local totalAmount = 0 -- Initialize to 0 instead of currentAmount
+		local last5MinAmount = 0
+
+		-- Send the initial update
+		--SendWebhookInfo(currentAmount, totalAmount)
+
+		-- Start a loop to update the currency every 1 minutes
+		while true do
+		    wait(updateDelay)
+		    local newAmount = getCurrentCurrencyAmount() or 0
+		    local deltaAmount = newAmount - currentAmount
+		    totalAmount = totalAmount + deltaAmount
+		    last5MinAmount = deltaAmount
+		    currentAmount = newAmount
+		    SendWebhookInfo(currentAmount, totalAmount)
+		end
 	   end,
 	   
 	})	
