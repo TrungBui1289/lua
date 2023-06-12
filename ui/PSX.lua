@@ -30,32 +30,6 @@ local CurrentPosition = nil
 local Webhook_Enabled = false
 local Webhook_URL = ""
 
-local plr = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
-local unixtime = os.time()
-local format = "%H:%M:%S | %a, %d %b %Y"
-local timei = os.date(format, unixtime)
-
-local updateDelay = 60  -- The delay between updates (in seconds)
-
--- Load the library
-local Library = require(game.ReplicatedStorage.Library)
-Library.Load()
-
--- Function to format a number with commas
-local function formatNumber(number)
-    return tostring(number):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
-end
-
--- Function to get the current amount of the specified currency
-local function getCurrentCurrencyAmount()
-    local saveData = Library.Save.Get()
-    if not saveData then
-        return nil
-    end
-    return saveData[currencyName]
-end
-
-
 LocalPlayer.CharacterAdded:Connect(function(char) 
 	Character = char
 	Humanoid = Character:WaitForChild("Humanoid")
@@ -907,15 +881,36 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		end	
 	end)()
 
+	--//*----------- WEBHOOK -----------//-
+	local currencyName = "Diamonds"
 	
+	local plr = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
+	local unixtime = os.time()
+	local format = "%H:%M:%S | %a, %d %b %Y"
+	local timei = os.date(format, unixtime)
+
+	local updateDelay = 60  -- The delay between updates (in seconds)
+
+	-- Load the library
+	local Library = require(game.ReplicatedStorage.Library)
+	Library.Load()
+
+	-- Function to format a number with commas
+	local function formatNumber(number)
+	    return tostring(number):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
+	end
+
+	-- Function to get the current amount of the specified currency
+	local function getCurrentCurrencyAmount()
+	    local saveData = Library.Save.Get()
+	    if not saveData then
+		return nil
+	    end
+	    return saveData[currencyName]
+	end
 	
 	function SendWebhookInfo(currentAmount, totalAmount)
 		if not Webhook_Enabled or not Webhook_URL or Webhook_URL == "" then return end
-
-		local gamemode = "[NORMAL]"
-		if Library.Shared.IsHardcore then 
-			gamemode = "[HARDCORE]"
-		end
 		
 		local embed = {
 			["title"] = "Cập nhật Gems",
@@ -936,13 +931,18 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 			Headers = {
 				['Content-Type'] = 'application/json';
 			};
-			Body = game:GetService('HttpService'):JSONEncode({
+			Body = HttpService:JSONEncode({
 				username = "Thông báo", 
 				avatar_url = 'https://i.imgur.com/5b6NmEo.png',
 				embeds = {embed} 
 			})
 		}
 	end
+	
+	-- Initialize the current and total amounts
+	local currentAmount = getCurrentCurrencyAmount() or 0
+	local totalAmount = 0 -- Initialize to 0 instead of currentAmount
+	local last5MinAmount = 0
 	
 	--//*----------- SETTINGS -----------//-
 	local settingsTab = Window:CreateTab("Settings", "13075268290", true)
@@ -954,6 +954,17 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		SectionParent = discordSettings,
 		Callback = function(value) 
 			Webhook_Enabled = value
+				
+			-- Start a loop to update the currency every 1 minutes
+			while true do
+			    wait(updateDelay)
+			    local newAmount = getCurrentCurrencyAmount() or 0
+			    local deltaAmount = newAmount - currentAmount
+			    totalAmount = totalAmount + deltaAmount
+			    last5MinAmount = deltaAmount
+			    currentAmount = newAmount
+			    SendWebhookInfo(currentAmount, totalAmount)
+			end
 		end
 	})
 
@@ -966,24 +977,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	   RemoveTextAfterFocusLost = false,
 	   Callback = function(Text)
 		SaveCustomFlag("Webhook_URL", Text)
-		-- Initialize the current and total amounts
-		local currentAmount = getCurrentCurrencyAmount() or 0
-		local totalAmount = 0 -- Initialize to 0 instead of currentAmount
-		local last5MinAmount = 0
-
-		-- Send the initial update
-		--SendWebhookInfo(currentAmount, totalAmount)
-
-		-- Start a loop to update the currency every 1 minutes
-		while true do
-		    wait(updateDelay)
-		    local newAmount = getCurrentCurrencyAmount() or 0
-		    local deltaAmount = newAmount - currentAmount
-		    totalAmount = totalAmount + deltaAmount
-		    last5MinAmount = deltaAmount
-		    currentAmount = newAmount
-		    SendWebhookInfo(currentAmount, totalAmount)
-		end
 	   end,
 	   
 	})	
@@ -1002,8 +995,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	end
 end
 
--- Teleport --
+-- Teleport
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8994.38184, -61.9601894, 2548.96167, 0.999595344, 1.17857162e-07, -0.0284447595, -1.16815023e-07, 1, 3.82990244e-08, 0.0284447595, -3.49607525e-08, 0.999595344)
 
--- Reduce Lag --
+-- Reduce Lag
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/reducelag.lua"))()
