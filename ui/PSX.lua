@@ -911,12 +911,12 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		
 		local embed = {
 			["title"] = "Cập nhật Gems",
-			["description"] = "Tổng số gems qua mỗi "..formatNumber(totalTime).." phút :penguin:\n-------------------------",
+			["description"] = "*Tổng số gems qua mỗi "..formatNumber(totalTime).." phút* :penguin:\n-------------------------",
 			["color"] = tonumber("0xe69138", 16), -- Orange
 			["fields"] = {
 			    {
 				["name"] = "",
-				["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:clock: **"..formatNumber(totalTime).." phút trước:** ``"..formatNumber(deltaAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
+				["value"] = ":gem: **Hiện có:** ``*"..formatNumber(currentAmount).."*``\n:clock: **"..formatNumber(totalTime).." phút trước:** ``*"..formatNumber(deltaAmount).."*``\n:gem: **Tổng nhận:** ``*"..formatNumber(totalAmount).."*``",
 			    }
 			},
 			["footer"] = {
