@@ -1,6 +1,6 @@
 -- Important Variables
 local SCRIPT_NAME = "TrungB PSX GUI"
-local SCRIPT_VERSION = "v0.1"
+local SCRIPT_VERSION = "v0.3"
 
 -- Detect if the script has executed by AutoExec
 local AutoExecuted = false
@@ -911,7 +911,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		
 		local embed = {
 			["title"] = "Cập nhật Gems",
-			["description"] = "Tổng số gems qua mỗi "..formatNumber(totalTime).." phút :penguin:",
+			["description"] = "Tổng số gems qua mỗi "..formatNumber(totalTime).." phút :penguin:\n-------------------------",
 			["color"] = tonumber("0xe69138", 16), -- Orange
 			["fields"] = {
 			    {
