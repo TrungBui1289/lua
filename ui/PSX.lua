@@ -29,6 +29,7 @@ local CurrentPosition = nil
 --//*--------------- WEB HOOK -------------//*
 local Webhook_Enabled = false
 local Webhook_URL = ""
+local Webhook_Timer = 60  -- The delay between updates (in seconds)
 
 LocalPlayer.CharacterAdded:Connect(function(char) 
 	Character = char
@@ -886,7 +887,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	local plr = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
 
-	local updateDelay = 60  -- The delay between updates (in seconds)
 
 	-- Load the library
 	local Library = require(game.ReplicatedStorage.Library)
@@ -906,17 +906,17 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	    return saveData[currencyName]
 	end
 	
-	function SendWebhookInfo(currentAmount, totalAmount, deltaAmount)
-		if not Webhook_Enabled or not Webhook_URL or Webhook_URL == "" then return end
+	function SendWebhookInfo(currentAmount, totalAmount, deltaAmount, totalTime)
+		if not Webhook_Enabled or not Webhook_Timer or Webhook_Timer == 0 or not Webhook_URL or Webhook_URL == "" then return end
 		
 		local embed = {
 			["title"] = "Cập nhật Gems",
-			["description"] = "Tổng số gems qua mỗi phút :penguin:",
+			["description"] = "Tổng số gems qua mỗi "..formatNumber(totalTime).." phút :penguin:",
 			["color"] = tonumber("0xe69138", 16), -- Orange
 			["fields"] = {
 			    {
 				["name"] = "",
-				["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:clock: **1 phút trước:** ``"..formatNumber(deltaAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
+				["value"] = ":gem: **Hiện có:** ``"..formatNumber(currentAmount).."``\n:clock: **"..formatNumber(totalTime).." phút trước:** ``"..formatNumber(deltaAmount).."``\n:gem: **Tổng nhận:** ``"..formatNumber(totalAmount).."``",
 			    }
 			},
 			["footer"] = {
@@ -942,31 +942,12 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	local currentAmount = getCurrentCurrencyAmount() or 0
 	local totalAmount = 0 -- Initialize to 0 instead of currentAmount
 	local last1MinAmount = 0
+	local totalTime = 0
 	
 	--//*----------- SETTINGS -----------//-
 	local settingsTab = Window:CreateTab("Settings", "13075268290", true)
-	local discordSettings = settingsTab:CreateSection("Webhook Options", false, true, "13085068876")
-	settingsTab:CreateToggle({
-		Name = "Enable Webhook",
-		CurrentValue = false,
-		Flag = "Webhook_Enabled",
-		SectionParent = discordSettings,
-		Callback = function(value) 
-			Webhook_Enabled = value
-				
-			-- Start a loop to update the currency every 1 minutes
-			while true do
-			    wait(updateDelay)
-			    local newAmount = getCurrentCurrencyAmount() or 0
-			    local deltaAmount = newAmount - currentAmount
-			    totalAmount = totalAmount + deltaAmount
-			    last1MinAmount = deltaAmount
-			    currentAmount = newAmount
-			    SendWebhookInfo(currentAmount, totalAmount, deltaAmount)
-			end
-		end
-	})
-
+	local discordSettings = settingsTab:CreateSection("Webhook Options", false, true, "13085068876")	
+	-- Webhook Url
 	local WebhookURLInput = settingsTab:CreateInput({
 	   Name = "Webhook URL",
 	   PlaceholderText = "Paste your Discord Webhook here",
@@ -987,6 +968,50 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		end
 	end)
 	
+	-- time to send Webhook
+	local WebhookTimerInput = settingsTab:CreateInput({
+	   Name = "Webhook Timer",
+	   PlaceholderText = "Type your Webhook timer here",
+	   SectionParent = discordSettings,
+	   NumbersOnly = true,
+	   OnEnter = false,
+	   RemoveTextAfterFocusLost = false,
+	   Callback = function(Text)
+		SaveCustomFlag("Webhook_Timer", Text)
+	   end,
+	   
+	})	
+		
+	AddCustomFlag("Webhook_Timer", "", function(newValue) 
+		Webhook_Timer = newValue
+		if WebhookTimerInput and newValue and newValue ~= "" then
+			WebhookTimerInput:Set(newValue)
+		end
+	end)
+	
+	-- Enable Webhook
+	settingsTab:CreateToggle({
+	Name = "Enable Webhook",
+	CurrentValue = false,
+	Flag = "Webhook_Enabled",
+	SectionParent = discordSettings,
+	Callback = function(value) 
+		Webhook_Enabled = value
+
+		-- Start a loop to update the currency every 1 minutes
+		while true do
+		    wait(Webhook_Timer)
+		    local newAmount = getCurrentCurrencyAmount() or 0
+		    local deltaAmount = newAmount - currentAmount
+		    totalAmount = totalAmount + deltaAmount
+		    last1MinAmount = deltaAmount
+		    currentAmount = newAmount
+			totalTime = Webhook_Timer / 60
+		    SendWebhookInfo(currentAmount, totalAmount, deltaAmount, totalTime)
+		end
+	end
+	})
+	-- Load config
 	Rayfield.LoadConfiguration()
 
 	for i,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
