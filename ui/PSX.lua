@@ -916,7 +916,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 			["fields"] = {
 			    {
 				["name"] = "",
-				["value"] = ":gem: **Hiện có:** ``*"..formatNumber(currentAmount).."*``\n:clock: **"..formatNumber(totalTime).." phút trước:** ``*"..formatNumber(deltaAmount).."*``\n:gem: **Tổng nhận:** ``*"..formatNumber(totalAmount).."*``",
+				["value"] = ":gem: **Hiện có:** ```"..formatNumber(currentAmount).."```\n:clock: **"..formatNumber(totalTime).." phút trước:** ```"..formatNumber(deltaAmount).."```\n:gem: **Tổng nhận:** ```"..formatNumber(totalAmount).."```",
 			    }
 			},
 			["footer"] = {
