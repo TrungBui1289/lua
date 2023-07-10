@@ -65,7 +65,7 @@ Farm:Toggle("Auto Click", "", false, function(v)
         end
     end)
 end)
-Farm:Toggle("Auto Event Egg", "", false, function(v)
+Farm:Toggle("Auto Event Egg (x8)", "", false, function(v)
     _G.Settings.autoEventEgg = v
     task.spawn(function()
         while task.wait() do
