@@ -10,7 +10,7 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
-local CloseBind = Enum.KeyCode.RightShift
+-- local CloseBind = Enum.KeyCode.RightShift
 
 local HunterLib = Instance.new("ScreenGui")
 HunterLib.Name = "HunterLib"
