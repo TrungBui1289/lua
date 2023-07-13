@@ -4,9 +4,6 @@ game:GetService("Players").LocalPlayer.Idled:Connect(function()
     game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
 
-
-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Zones["3"]["Interactables"].Training.PunchBags.VIP["Axel_Cylinder.281"].CFrame
-
 _G.Settings = {
 	autoBoss = false;
 	autoClaimGift = false;
@@ -182,3 +179,6 @@ Mics:Button("Serverhop Low Server", "", function()
         end
     end
 end)
+
+wait(3)
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Zones["3"]["Interactables"].Training.PunchBags.VIP["Axel_Cylinder.281"].CFrame
