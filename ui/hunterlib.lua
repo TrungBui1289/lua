@@ -93,8 +93,8 @@ end
 
 
 function Hunter:Window(text, bottom,mainclr,toclose)
-	--CloseBind = toclose or Enum.KeyCode.RightControl
-	CloseBind = toclose
+	CloseBind = toclose or Enum.KeyCode.RightShift
+	--CloseBind = toclose
 	PresetColor = mainclr
 	--PresetColor = mainclr or Color3.fromRGB(66, 134, 255)
 	local fs = false
