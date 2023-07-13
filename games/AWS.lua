@@ -19,7 +19,7 @@ _G.Settings = {
 local Player            = game:GetService("Players").LocalPlayer
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/TrungBui1289/lua/main/ui/hunterlib.lua"))()
-local w       = library:Window("TrungB Scripts", "AWS [RShift]", Color3.fromRGB(182, 0, 182), Enum.UserInputType.RightShift)
+local w       = library:Window("TrungB Scripts", "AWS [RShift]", Color3.fromRGB(182, 0, 182), Enum.KeyCode.RightShift)
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage").Packages["_Index"]["sleitnick_knit@1.4.7"].knit.Services
 
