@@ -4,14 +4,17 @@ game:GetService("Players").LocalPlayer.Idled:Connect(function()
     game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
 
+
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Zones["3"]["Interactables"].Training.PunchBags.VIP["Axel_Cylinder.281"].CFrame
+
 _G.Settings = {
 	autoBoss = false;
 	autoClaimGift = false;
 	autoGrips = false;
-	autoDumbells = false;
-	autoBag = false;
+	autoDumbells = true;
+	autoBag = true;
 	autoRebirth = false;
-	autoClick = false;
+	autoClick = true;
 	autoEventEgg = false;
     walkSpeed = false;
 }
@@ -55,7 +58,7 @@ Farm:Toggle("Auto Rebirth", "", false, function(v)
 end)
 Farm:Line()
 
-Farm:Toggle("Auto Click", "", false, function(v)
+Farm:Toggle("Auto Click", "", true, function(v)
     _G.Settings.autoClick = v
     task.spawn(function()
         while task.wait() do
@@ -81,7 +84,7 @@ end)
 
 Farm:Line()
 
-Farm:Toggle("Auto Dumbells", "", false, function(v)
+Farm:Toggle("Auto Dumbells", "", true, function(v)
     _G.Settings.autoDumbells = v
     task.spawn(function()
         while task.wait() do
@@ -115,7 +118,7 @@ Farm:Toggle("Auto Grips", "", false, function(v)
     end)
 end)
 
-Farm:Toggle("Auto Bag (Must near bag)", "", false, function(v)
+Farm:Toggle("Auto Bag (Must near bag)", "", true, function(v)
     _G.Settings.autoBag = v
     task.spawn(function()
         while task.wait() do
