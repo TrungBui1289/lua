@@ -34,11 +34,15 @@ Farm:Toggle("Auto Claim Gift", "", false, function(v)
         while task.wait() do
             if not _G.Settings.autoClaimGift then break end
             for i, v in pairs(ReplicatedStorage.TimedRewardService:GetChildren()) do
-				for i2 = 1, 12, 1 do
+			for i2 = 1, 12, 1 do
+				if i2 == 4 or i2 == 7 or i2 == 10 then
+				
+				else
 					v.onClaim:FireServer(i2)
 					wait(0.5)
 				end
 			end
+		end
         end
     end)
 end)
