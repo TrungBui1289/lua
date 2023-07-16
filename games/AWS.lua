@@ -12,7 +12,6 @@ _G.Settings = {
 	autoBag = true;
 	autoRebirth = false;
 	autoClick = true;
-	autoNinjaEgg = false;
 	autoEventEgg = false;
     walkSpeed = false;
 }
@@ -52,7 +51,7 @@ Farm:Toggle("Auto Rebirth", "", false, function(v)
     task.spawn(function()
         while task.wait() do
             if not _G.Settings.autoRebirth then break end
-            for i, v in pairs(ReplicatedStorage.RebirthServer:GetChildren()) do
+            for i, v in pairs(ReplicatedStorage.RebirthService:GetChildren()) do
 				v.onRebirthRequest:FireServer()
 			end
         end
@@ -78,20 +77,6 @@ Farm:Toggle("Auto Event Egg (x8)", "", false, function(v)
             for i, v in pairs(ReplicatedStorage.EventService.RF:GetChildren()) do
 				if v:IsA("RemoteFunction") and v.Name == "ClaimEgg" then
 					v:InvokeServer(8)
-				end
-			end
-        end
-    end)
-end)
-
-Farm:Toggle("Auto Ninja Egg (x8)", "", false, function(v)
-    _G.Settings.autoNinjaEgg = v
-    task.spawn(function()
-        while task.wait() do
-            if not _G.Settings.autoNinjaEgg then break end
-            for i, v in pairs(ReplicatedStorage.EventService.RF:GetChildren()) do
-				if v:IsA("RemoteFunction") and v.Name == "ClaimEgg" then
-					v:InvokeServer(8, true)
 				end
 			end
         end
