@@ -6,7 +6,7 @@ end)
 
 _G.Settings = {
 	autoBoss = false;
-	autoClaimGift = false;
+	autoClaimGift = true;
 	autoGrips = false;
 	autoDumbells = true;
 	autoBag = true;
@@ -27,7 +27,7 @@ local humanoid = game.Players.LocalPlayer.Character.Humanoid
 
 local Farm = w:Tab("Farming", 6034287535)
 
-Farm:Toggle("Auto Claim Gift", "", false, function(v)
+Farm:Toggle("Auto Claim Gift", "", true, function(v)
     _G.Settings.autoClaimGift = v
     task.spawn(function()
         while task.wait() do
