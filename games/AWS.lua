@@ -6,10 +6,13 @@ end)
 
 _G.Settings = {
 	autoBoss = false;
-	autoClaimGift = true;
+	autoClaimGift = false;
 	autoGrips = false;
-	autoDumbells = true;
-	autoBag = true;
+	autoGrips2 = false;
+	autoDumbells = false;
+	autoDumbells2 = true;
+	autoBag = false;
+	autoBag2 = true;
 	autoRebirth = false;
 	autoClick = true;
 	autoEventEgg = false;
@@ -27,7 +30,7 @@ local humanoid = game.Players.LocalPlayer.Character.Humanoid
 
 local Farm = w:Tab("Farming", 6034287535)
 
-Farm:Toggle("Auto Claim Gift", "", true, function(v)
+Farm:Toggle("Auto Claim Gift", "", false, function(v)
     _G.Settings.autoClaimGift = v
     task.spawn(function()
         while task.wait() do
@@ -85,7 +88,7 @@ end)
 
 Farm:Line()
 
-Farm:Toggle("Auto Dumbells", "", true, function(v)
+Farm:Toggle("Auto Dumbells", "", false, function(v)
     _G.Settings.autoDumbells = v
     task.spawn(function()
         while task.wait() do
@@ -119,16 +122,69 @@ Farm:Toggle("Auto Grips", "", false, function(v)
     end)
 end)
 
-Farm:Toggle("Auto Bag (Must near bag)", "", true, function(v)
+Farm:Toggle("Auto Bag (Must near bag)", "", false, function(v)
     _G.Settings.autoBag = v
     task.spawn(function()
-        while task.wait() do
+    	while task.wait() do
             if not _G.Settings.autoBag then break end
 			for i2, v2 in pairs(ReplicatedStorage.PunchBagService.RE:GetChildren()) do
 				if v2:IsA("RemoteEvent") then
 					if v2.Name == "onGiveStats" then
 						v2:FireServer(3, "VIP", true)
-						ReplicatedStorage.ToolService.RE.onClick:FireServer()
+						--ReplicatedStorage.ToolService.RE.onClick:FireServer()
+					end
+				end
+			end
+        end
+    end)
+end)
+
+Farm:Line()
+
+Farm:Toggle("Auto Dumbells World 4", "", true, function(v)
+    _G.Settings.autoDumbells2 = v
+    task.spawn(function()
+        while task.wait() do
+            if not _G.Settings.autoDumbells2 then break end
+			for i2, v2 in pairs(ReplicatedStorage.ToolService.RE:GetChildren()) do
+				if v2:IsA("RemoteEvent") then
+					if v2.Name == "onEquipRequest" then
+						v2:FireServer(4, "Dumbells", "300000Kg")
+					end
+				end
+				ReplicatedStorage.ToolService.RE.onClick:FireServer()
+			end
+        end
+    end)
+end)
+
+Farm:Toggle("Auto Grips World 4", "", false, function(v)
+    _G.Settings.autoGrips2 = v
+    task.spawn(function()
+        while task.wait() do
+            if not _G.Settings.autoGrips2 then break end
+			for i2, v2 in pairs(ReplicatedStorage.ToolService.RE:GetChildren()) do
+				if v2:IsA("RemoteEvent") then
+					if v2.Name == "onEquipRequest" then
+						v2:FireServer(4, "Grips", "300000Kg")
+					end
+				end
+				ReplicatedStorage.ToolService.RE.onClick:FireServer()
+			end
+        end
+    end)
+end)
+
+Farm:Toggle("Auto Bag World 4 (Must near bag)", "", true, function(v)
+    _G.Settings.autoBag2 = v
+    task.spawn(function()
+    	while task.wait() do
+            if not _G.Settings.autoBag2 then break end
+			for i2, v2 in pairs(ReplicatedStorage.PunchBagService.RE:GetChildren()) do
+				if v2:IsA("RemoteEvent") then
+					if v2.Name == "onGiveStats" then
+						v2:FireServer(4, "VIP", true)
+						--ReplicatedStorage.ToolService.RE.onClick:FireServer()
 					end
 				end
 			end
@@ -185,4 +241,4 @@ Mics:Button("Serverhop Low Server", "", function()
 end)
 
 wait(3)
-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Zones["3"]["Interactables"].Training.PunchBags.VIP["Axel_Cylinder.281"].CFrame
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Zones["4"]["Interactables"].Training.PunchBags.VIP["Axel_Cylinder.281"].CFrame
