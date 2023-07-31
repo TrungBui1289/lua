@@ -1,6 +1,6 @@
-if game.CoreGui:FindFirstChild("HunterLib") then
-    game.CoreGui:FindFirstChild("HunterLib"):Destroy()
-end
+--if game.CoreGui:FindFirstChild("HunterLib") then
+--    game.CoreGui:FindFirstChild("HunterLib"):Destroy()
+--end
 
 local Hunter = {RainbowColorValue = 0, HueSelectionPosition = 0}
 --local PresetColor = Color3.fromRGB(66, 134, 255)
